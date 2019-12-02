@@ -1,0 +1,63 @@
+{% comment %}
+  This page represents the /collections and /products pages.
+{% endcomment %}
+
+
+<div id="collection-counter">
+<span class="num">1</span>/<span class="denom">0</span>
+</div>
+{% for link in linklists.shop-collections.links %}
+{% assign collection = link.object %}
+  {% unless collection.handle == 'frontpage' %}
+    <div class="collection-container" data-section-name="{{collection.title}}">
+      
+      <a class="collection-banner" style="background-image: url({{ collection.image | img_url: 'master' }})" href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: title }}">
+        {% if collection.image != blank or collection.products.first != blank %}
+          {%- assign image_object = collection.image | default: collection.products.first.featured_image -%}
+           
+        {% else %}
+          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+          {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+        {% endif %}
+      </a>
+      <div class="collection-info">
+        <h1>{{ collection.title }}</h1>
+        <div class="collection-preview">
+          <div class="grid grid--narrow">
+            {% paginate collection.products by 3 %}
+              {% for product in collection.products %}
+                <div class="grid__item one-third">
+                  <a href="{{product.url}}" title="{{product.title}}"><img src="{{ product | img_url: "master" }}" alt="{{product.title}}"></a>
+                </div>
+              {% endfor %}
+            {% endpaginate %}
+          </div>
+        </div>
+        <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: title }}" style="text-align: right;"><h2>Shop Now →</h2></a>
+      </div>
+    </div>
+  {% endunless %}
+{% endfor %}
+
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.19/jquery.scrollify.min.js"></script>
+
+  <script>
+  $('#collection-counter .denom').text($('.collection-container').length);
+    $(function() {
+      $.scrollify({
+        section : ".collection-container",
+        sectionName: "section-name",
+        scrollSpeed: 1100,
+        before:function() {
+          var i = $($.scrollify.current()).index();
+          $('#collection-counter .num').text(i);
+        }
+      });
+    });
+  </script>

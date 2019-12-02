@@ -1,0 +1,224 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Starter theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Shopify",
+    "theme_documentation_url": "https://github.com/Shopify/starter-theme",
+    "theme_support_url": "https://github.com/Shopify/starter-theme/issues"
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image",
+        "info": "Triton Outfitters logo"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent",
+        "default": "#00747A",
+        "info": "Buttons and special ornaments"
+      },
+      {
+        "type": "color",
+        "id": "color_body_text",
+        "label": "Text",
+        "default": "#050708"
+      },
+      {
+        "type": "color",
+        "id": "color_main_bg",
+        "label": "Background",
+        "default": "#fff"
+      }
+    ]
+  },
+  {
+    "name": "Sideways title",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "sideways_title",
+        "label": "Sideways title on landing page"
+      }
+    ]
+  },
+  {
+    "name": "Home images",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "home_image_default",
+        "label": "Default image"
+      },
+      {
+        "type": "image_picker",
+        "id": "home_image_1",
+        "label": "Image 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "home_image_2",
+        "label": "Image 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "home_image_3",
+        "label": "Image 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "home_image_4",
+        "label": "Image 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "home_image_5",
+        "label": "Image 5"
+      },
+      {
+        "type": "image_picker",
+        "id": "home_image_6",
+        "label": "Image 6"
+      },
+      {
+        "type": "image_picker",
+        "id": "home_image_7",
+        "label": "Image 7"
+      },
+      {
+        "type": "image_picker",
+        "id": "home_image_8",
+        "label": "Image 8"
+      },
+      {
+        "type": "image_picker",
+        "id": "home_image_9",
+        "label": "Image 9"
+      },
+      {
+        "type": "image_picker",
+        "id": "home_image_10",
+        "label": "Image 10"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social sharing image"
+      },
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Image",
+        "info": "Shown when sharing a link on social media. [Learn more](https://help.shopify.com/manual/using-themes/troubleshooting/showing-social-media-thumbnail-images/) about image thumbnails."
+      },
+      {
+        "type": "header",
+        "content": "Social sharing options"
+      },
+      {
+        "type": "checkbox",
+        "id": "social_sharing_blog",
+        "label": "Enable sharing for blog articles",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_facebook",
+        "label": "Share on Facebook",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_twitter",
+        "label": "Tweet on Twitter",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_pinterest",
+        "label": "Pin on Pinterest",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Sharing links"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter link"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook link"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest link"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram link"
+      },
+      {
+        "type": "text",
+        "id": "social_snapchat_link",
+        "label": "Snapchat link"
+      },
+      {
+        "type": "text",
+        "id": "social_tumblr_link",
+        "label": "Tumblr link"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "Youtube link"
+      },
+      {
+        "type": "text",
+        "id": "social_vimeo_link",
+        "label": "Vimeo link"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Enable cart notes",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  }
+]

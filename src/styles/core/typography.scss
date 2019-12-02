@@ -1,0 +1,94 @@
+@font-face {
+  font-family: "Din";
+  src: url("../assets/fonts/din/din.woff2") format("woff2"),
+    url("../assets/fonts/din/din.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Graphik";
+  src: url("../assets/fonts/graphik/Graphik-Regular.woff2") format("woff2"),
+    url("../assets/fonts/graphik/Graphik-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Graphik";
+  src: url("../assets/fonts/graphik/Graphik-Semibold.woff2") format("woff2"),
+    url("../assets/fonts/graphik/Graphik-Semibold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  //font-family: $font-body;
+  color: $color-body-text;
+  font-weight: $font-body-weight;
+  font-style: $font-body-style;
+  font-family: "Graphik";
+  font-size: 1.5rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  //font-family: $font-heading;
+
+  text-transform: uppercase;
+  // letter-spacing: 0.05em;
+  font-weight: normal;
+}
+
+h1 {
+  font-family: "Din";
+  font-size: 10rem;
+  font-size: 5vw;
+}
+
+h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+p {
+  line-height: 170%;
+}
+
+.header {
+  @extend p;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+body,
+input,
+textarea,
+button,
+select {
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
+}
+
+a {
+  color: $color-accent;
+  text-decoration: none;
+}
+
+a:focus {
+  color: inherit;
+}
