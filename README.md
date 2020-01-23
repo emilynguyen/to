@@ -42,7 +42,7 @@ All developers who wish to contribute through code or issues, take a look at the
 
 ## Connecting to Your Store
 
-(https://shopify.github.io/slate/docs/connect-to-your-store)
+https://shopify.github.io/slate/docs/connect-to-your-store
 
 ## License
 
