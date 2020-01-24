@@ -30,6 +30,8 @@
     - exactly 1.0 is square
     - greater than 1.0 is landscape
   {%- endcomment -%}
+
+  /* 
   {%- if image.aspect_ratio <= 1 -%}
     {%- assign max_height_image = image.height | at_most: max_height -%}
     {%- assign max_width_image = max_height_image | times: image.aspect_ratio -%}
@@ -44,7 +46,7 @@
   }
   #ImageWrapper-{{ image.id }}-{{ responsive_image_counter }} {
     max-width: {{ max_width_image }}px;
-  }
+  }*/ 
 
   #ImageWrapper-{{ image.id }}-{{ responsive_image_counter }}::before {
     {%- comment -%}

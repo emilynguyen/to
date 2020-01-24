@@ -68,3 +68,7 @@ $spacer-3: $spacer-2 * 2;
 $spacer-4: $spacer-3 * 2;
 
 $teal: #00747a;
+
+$logo-height: 5.5rem;
+$side-margin: 4vw;
+$top-space: calc(#{$logo-height} + #{$side-margin} * 2);

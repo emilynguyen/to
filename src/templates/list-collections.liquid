@@ -4,8 +4,9 @@
 
 
 <div id="collection-counter">
-<span class="num">1</span>/<span class="denom">0</span>
+  <span class="num">1</span>/<span class="denom">0</span>
 </div>
+
 {% for link in linklists.shop-collections.links %}
 {% assign collection = link.object %}
   {% unless collection.handle == 'frontpage' %}

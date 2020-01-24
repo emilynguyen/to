@@ -1,24 +1,23 @@
 {{ content_for_index }}
 
+{% assign first_collection = linklists.shop-collections.links.first.object %}
 
-
-<div id="splash" style="background-image: url(' {% if settings.home_image_default != blank %}{{ settings.home_image_default | img_url: 'master' }}{% else %}{{ settings.home_image_1 | img_url: 'master' }}{% endif %}');">
+<div id="default-splash" style="background-image: url(' {% if settings.home_image_default != blank %}{{ settings.home_image_default | img_url: 'master' }}{% else %}{{ first_collection.image | img_url: 'master' }}{% endif %}');">
 </div>
 
+<div id="splash" style="background-image: url(' {% if settings.home_image_default != blank %}{{ settings.home_image_default | img_url: 'master' }}{% else %}{{ first_collection.image | img_url: 'master' }}{% endif %}');">
+</div>
 
-
-<ul id="home-images" style="visibilit: hidden;">
-    <li style="background-image: url('{{ settings.home_image_1 | img_url: 'master' }}');"></li>
-    <li style="background-image: url('{{ settings.home_image_2 | img_url: 'master' }}');"></li>
-    <li style="background-image: url('{{ settings.home_image_3 | img_url: 'master' }}');"></li>
-    <li style="background-image: url('{{ settings.home_image_4 | img_url: 'master' }}');"></li>
-    <li style="background-image: url('{{ settings.home_image_5 | img_url: 'master' }}');"></li>
-    <li style="background-image: url('{{ settings.home_image_6 | img_url: 'master' }}');"></li>
-    <li style="background-image: url('{{ settings.home_image_7 | img_url: 'master' }}');"></li>
-    <li style="background-image: url('{{ settings.home_image_8 | img_url: 'master' }}');"></li>
-    <li style="background-image: url('{{ settings.home_image_9 | img_url: 'master' }}');"></li>
-    <li style="background-image: url('{{ settings.home_image_10 | img_url: 'master' }}');"></li>
+<ul id="home-images">
+{% for link in linklists.shop-collections.links %}
+  {% assign collection = link.object %}
+    <li style="background-image: url('{{ collection.image | img_url: 'master' }}');"></li>
+{% endfor %}
 </ul>
+
+
+
+
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -26,11 +25,17 @@
   crossorigin="anonymous"></script>
 
 <script>
-$('#nav a').mouseover(function() {
-   $(this).closest('li').addClass('active');
-   var i = $(this).closest('li').index();
-   var newImg = $('#home-images li').eq(i).css('background-image');
-   $('#splash').css('background-image', newImg);
-});
+  $('#nav a').mouseover(function() {
+    $(this).closest('li').addClass('active');
+    var i = $(this).closest('li').index();
+    var newImg = $('#home-images li').eq(i).css('background-image');
+    $('#splash').css('background-image', newImg);
+  });
+
+  // Switch to default img if #nav is left
+  $('#nav').mouseleave(function() {
+    var defaultImg = $('#default-splash').css('background-image');
+    $('#splash').css('background-image', defaultImg);
+  });
 </script>
 

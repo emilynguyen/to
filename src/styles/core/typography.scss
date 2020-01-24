@@ -56,22 +56,29 @@ h6 {
 h1 {
   font-family: "Din";
   font-size: 10rem;
-  font-size: 5vw;
+  font-size: 5.2vw;
+  @include grid-media-query(desk) {
+    
+  }
 }
 
 h2 {
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   font-weight: bold;
 }
 
 p {
-  line-height: 170%;
+  line-height: 160%;
+}
+
+b {
+  font-weight: 600;
 }
 
 .header {
   @extend p;
   font-size: 1.2rem;
-  line-height: 1.5;
+  line-height: 160%;
   text-transform: uppercase;
 }
 
@@ -92,3 +99,4 @@ a {
 a:focus {
   color: inherit;
 }
+
