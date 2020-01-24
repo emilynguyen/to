@@ -40,6 +40,10 @@ please see [CONTRIBUTING.md](https://github.com/Shopify/starter-theme/blob/maste
 All developers who wish to contribute through code or issues, take a look at the
 [Code of Conduct](https://github.com/Shopify/starter-theme/blob/master/CODE_OF_CONDUCT.md).
 
+## Connecting to Your Store
+
+https://shopify.github.io/slate/docs/connect-to-your-store
+
 ## License
 
 Copyright © 2018 Shopify. See [LICENSE](https://github.com/Shopify/starter-theme/blob/master/LICENSE) for further details.
