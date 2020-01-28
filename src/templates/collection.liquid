@@ -8,33 +8,32 @@
 </div>
 
 <div id="collection" class="pt-4 pb-3">
-
   <div class="grid grid--narrow">
     {% for product in collection.products %}
-    <div class="grid__item lap--one-third one-quarter mb-3 {% if product.available %}available{% else %}soldout{% endif %}">
+    <div
+      class="grid__item one-third desk--one-quarter mb-3 {% if product.available %}available{% else %}soldout{% endif %}"
+    >
       {% if product.featured_image != blank %}
       <a href="{{ product.url | within: collection }}">
-        
         <!--
         {% include 'responsive-image' with image: product.featured_image,
         max_width: 1400, max_height: 1600 %}
 -->
 
         <div class="product-container">
-            <img src="{{ product.featured_image | img_url: 'master' }}" alt="">
-          </div>
+          <img src="{{ product.featured_image | img_url: 'master' }}" alt="" />
+        </div>
       </a>
       {% endif %}
-      <p class="mt-1" >
-          <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-        </p>
-        <p>
-          <b>{{product.price | money }}</b>
-        </p>
+      <p class="mt-1">
+        <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+      </p>
+      <p>
+        <b>{{ product.price | money }}</b>
+      </p>
     </div>
     {% endfor %}
   </div>
-
 </div>
 
 <script
@@ -45,9 +44,9 @@
 
 <script>
   // Set padding-right on collection to = sidebar
-  $(window).on('load resize', function () {
+  $(window).on("load resize", function() {
     var sidebarWidth = $("#side").innerWidth();
-   $('#collection').css('padding-left', sidebarWidth);
-    $('#collection').css('padding-right', sidebarWidth);
+    $("#collection").css("padding-left", sidebarWidth);
+    $("#collection").css("padding-right", sidebarWidth);
   });
 </script>

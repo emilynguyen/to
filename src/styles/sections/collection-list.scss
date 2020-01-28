@@ -24,7 +24,7 @@
   position: fixed;
   top: $side-margin;
   margin-left: 35vw;
-  padding-left: $spacer-3;
+  padding-left: calc(#{$spacer-3} - 1rem);
   @extend .header;
 }
 
