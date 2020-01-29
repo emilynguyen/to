@@ -178,7 +178,7 @@ $class-type: if($use-silent-classes, unquote("%"), unquote("."));
       $breakpoint-found: true;
 
       @media only screen and #{$declaration} {
-        // @content;
+        @content;
       }
     }
   }

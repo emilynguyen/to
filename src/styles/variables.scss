@@ -32,12 +32,25 @@ $font-body-bold-weight: var(--font-body-bold-weight);
 $transition-duration: 250ms;
 $transition-timing: ease-in-out;
 
+$spacer-1: 1.5rem;
+$spacer-2: $spacer-1 * 2;
+$spacer-3: $spacer-2 * 2;
+$spacer-4: $spacer-3 * 2;
+
 // Grid
-$grid-medium: 46.85em;
-$grid-large: 61.85em;
-$grid-widescreen: 87.5em;
-$grid-max-width: 73.75em;
-$grid-gutter: 30px;
+//$grid-medium: 46.85em;
+//$grid-large: 61.85em;
+//$grid-widescreen: 87.5em;
+//$grid-max-width: 73.75em;
+//$grid-gutter: 30px;
+
+// Grid
+$grid-medium: 480px;
+$grid-large: 1024px;
+$grid-widescreen: 1800px;
+$grid-max-width: 1800px;
+$grid-gutter: $spacer-2;
+$grid-gutter-mobile: $spacer-1;
 
 // Breakpoints used with the media-query mixin
 $all: "";
@@ -62,10 +75,20 @@ $breakpoints: (
   $widescreen "(min-width: #{$grid-widescreen})"
 );
 
-$spacer-1: 1.5rem;
-$spacer-2: $spacer-1 * 2;
-$spacer-3: $spacer-2 * 2;
-$spacer-4: $spacer-3 * 2;
+/*============================================================================
+  Generate breakpoint-specific column widths and push classes
+    - Default column widths: $breakpoint-has-widths: ($small, $medium-up);
+    - Default is no push classes
+    - Will not work if `styles/global/grid.scss` is removed
+==============================================================================*/
+$breakpoint-has-widths: (
+  $small,
+  $medium-up,
+  $medium-down,
+  $large-up,
+  $widescreen
+);
+$breakpoint-has-push: ();
 
 $teal: #00747a;
 

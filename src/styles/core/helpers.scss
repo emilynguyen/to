@@ -76,7 +76,7 @@
 
 @each $breakpoint in $breakpoints {
   $name: nth($breakpoint, 1);
-  @include grid-media-query($name) {
+  @include media-query($name) {
     @if $name == "" {
       $name: "";
     } @else {
