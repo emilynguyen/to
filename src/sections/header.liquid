@@ -111,6 +111,37 @@
         <a class="nav-header mb-1 {% if "/products" == request.path %}active{% endif %}" href="">Shop By Product</a>
         <a class="nav-header mb-1 {% if "/pages/madetoorder" == request.path %}active{% endif %}" href="/pages/madetoorder">Made To Order</a>
         <a class="nav-header {% if "/pages/story" == request.path %}active{% endif %}" href="/pages/story">About Us</a>
+
+        <!-- top nav -->
+       
+            {% if shop.customer_accounts_enabled %}
+                {% if customer %}
+            
+                    {% if customer.first_name != blank %}
+                    {% capture first_name %}<a class="nav-header mb-1" href="/account">{{ customer.first_name }}</a>{% endcapture %}
+                    {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
+                    {% else %}
+                    <a class="nav-header mb-1" href="/account">{{ 'layout.customer.account' | t }}</a>
+                    {% endif %}
+               
+                    {{ 'layout.customer.log_out' | t | customer_logout_link }}
+                
+                {% else %}
+               
+                    {{ 'layout.customer.log_in' | t | customer_login_link }}
+             
+                {% endif %}
+            {% endif %}
+
+          
+                <form class="search" action="/search">
+                    <label>Search</label>
+                    <input class="search-input" type="text" name="q" value="{{ search.terms | escape }}"  />
+                    <input class="search-submit" type="submit" value="Search" />
+                </form>
+            
+      
+       
       </nav>
   </div>
   {% if template.name == "index" %} 
