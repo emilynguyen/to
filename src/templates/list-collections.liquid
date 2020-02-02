@@ -1,7 +1,8 @@
-{% comment %} This page represents the /collections and /products pages. {%
-endcomment %}
+<!--
+This page represents the /collections and /products pages.
+-->
 
-<div id="collection-counter">
+<div id="collection-counter" class="medium-down--hide">
   <span class="num">1</span>/<span class="denom">0</span>
 </div>
 
@@ -24,8 +25,11 @@ link.object %} {% unless collection.handle == 'frontpage' %}
         | placeholder_svg_tag: "placeholder-svg placeholder-svg--small"
     }}
     {% endif %}
+    <div class="title-mobile large-up--hide">
+      <h1>{{ collection.title }}</h1>
+    </div>
   </a>
-  <div class="collection-info">
+  <div class="collection-info medium-down--hide">
     <h1>{{ collection.title }}</h1>
     <div class="collection-preview">
       <div class="grid">

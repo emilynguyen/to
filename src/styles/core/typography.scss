@@ -6,6 +6,7 @@
   font-style: normal;
 }
 
+/*
 @font-face {
   font-family: "Graphik";
   src: url("../assets/fonts/graphik/Graphik-Regular.woff2") format("woff2"),
@@ -18,6 +19,24 @@
   font-family: "Graphik";
   src: url("../assets/fonts/graphik/Graphik-Semibold.woff2") format("woff2"),
     url("../assets/fonts/graphik/Graphik-Semibold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+*/
+
+@font-face {
+  font-family: "Suisse Int'l";
+  src: url("../assets/fonts/suisseintl/SuisseIntl.woff2") format("woff2"),
+    url("../assets/fonts/suisseintl/SuisseIntl.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Suisse Int'l";
+  src: url("../assets/fonts/suisseintl/SuisseIntl-SemiBold.woff2")
+      format("woff2"),
+    url("../assets/fonts/suisseintl/SuisseIntl-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
 }
@@ -35,8 +54,11 @@ body {
   color: $color-body-text;
   font-weight: $font-body-weight;
   font-style: $font-body-style;
-  font-family: "Graphik";
+  font-family: "Suisse Int'l";
   font-size: 1.5rem;
+  @include media-query(small) {
+    //font-size: 1.2rem;
+  }
 }
 
 h1,
@@ -53,7 +75,7 @@ h1 {
   font-family: "Din";
   font-size: 6vw;
   @include media-query(medium-down) {
-    //font-size: 8vw;
+    font-size: 12vw;
   }
 }
 
@@ -63,7 +85,7 @@ h2 {
 }
 
 p {
-  line-height: 160%;
+  line-height: 140%;
 }
 
 b {
@@ -72,9 +94,19 @@ b {
 
 .header {
   @extend p;
-  font-size: 1.2rem;
+  // font-size: 1.2rem;
+  font-size: 80%;
   line-height: 160%;
   text-transform: uppercase;
+}
+
+#side {
+  .header {
+    @include media-query(small) {
+      line-height: 175%;
+      font-size: 90%;
+    }
+  }
 }
 
 body,

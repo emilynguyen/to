@@ -62,10 +62,12 @@
     class="template-{{ template.name | handle }}"
   >
     <div id="content">
-      <input type="checkbox" id="hamburger" name="menu" class="menu-checkbox" />
+      <input type="checkbox" id="hamburger" name="menu" class="hamburger" />
 
       <div id="side">
-        <label class="hamburger-toggle" for="hamburger"
+        <label
+          class="hamburger-toggle hamburger {%if template.name == 'index' or template.name == 'list-collections' or template.name == 'collection' %}white{% endif %}"
+          for="hamburger"
           ><span>Toggle</span></label
         >
         {% section 'header' %}
@@ -91,4 +93,39 @@
   } else {
     console.log("unchecked");
   }
+</script>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"
+></script>
+
+<script>
+  $("html").click(function(e) {
+    var targetClasses = e.target.classList;
+    // return if hamburger
+    if (targetClasses.contains("hamburger")) {
+      return;
+    }
+    // if menu is open, close by unchecking box
+    var menuOpen = $("#hamburger:checked").length > 0;
+    if (menuOpen) {
+      $("#hamburger").prop("checked", false);
+      return false;
+    }
+  });
+
+  // close menu on scroll
+  $(window).scroll(function() {
+    var menuOpen = $("#hamburger:checked").length > 0;
+    if (menuOpen) {
+      $("#hamburger").prop("checked", false);
+    }
+  });
+
+  $("#side section").click(function(event) {
+    console.log("side clicked");
+    event.stopPropagation();
+  });
 </script>

@@ -2,40 +2,62 @@
 
 {% assign first_collection = linklists.shop-collections.links.first.object %}
 
-<div id="default-splash" style="background-image: url(' {% if settings.home_image_default != blank %}{{ settings.home_image_default | img_url: 'master' }}{% else %}{{ first_collection.image | img_url: 'master' }}{% endif %}');">
+<!-- load default splash image -->
+<div
+  id="default-splash"
+  style="background-image: url(' {% if settings.home_image_default != blank %}{{
+    settings.home_image_default | img_url: 'master'
+  }}{% else %}{{ first_collection.image | img_url: 'master' }}{% endif %}');"
+></div>
+
+<!-- splash container -->
+<div
+  id="splash"
+  style="background-image: url(' {% if settings.home_image_default != blank %}{{
+    settings.home_image_default | img_url: 'master'
+  }}{% else %}{{ first_collection.image | img_url: 'master' }}{% endif %}');"
+>
+  <div class="title-mobile large-up--hide">
+    <div>
+      <h1 class="mb-1">{{ shop.name }}</h1>
+      <a href="/collections" title=""><h2>Shop Now →</h2></a>
+    </div>
+  </div>
 </div>
 
-<div id="splash" style="background-image: url(' {% if settings.home_image_default != blank %}{{ settings.home_image_default | img_url: 'master' }}{% else %}{{ first_collection.image | img_url: 'master' }}{% endif %}');">
-</div>
-
+<!-- load collection images-->
 <ul id="home-images">
-{% for link in linklists.shop-collections.links %}
-  {% assign collection = link.object %}
-    <li style="background-image: url('{{ collection.image | img_url: 'master' }}');"></li>
-{% endfor %}
+  {% for link in linklists.shop-collections.links %} {% assign collection =
+  link.object %}
+  <li
+    style="background-image: url('{{ collection.image | img_url: 'master' }}');"
+  ></li>
+  {% endfor %}
 </ul>
-
-
-
-
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous"
+></script>
 
 <script>
-  $('#nav a').mouseover(function() {
-    $(this).closest('li').addClass('active');
-    var i = $(this).closest('li').index();
-    var newImg = $('#home-images li').eq(i).css('background-image');
-    $('#splash').css('background-image', newImg);
+  $("#nav a").mouseover(function() {
+    $(this)
+      .closest("li")
+      .addClass("active");
+    var i = $(this)
+      .closest("li")
+      .index();
+    var newImg = $("#home-images li")
+      .eq(i)
+      .css("background-image");
+    $("#splash").css("background-image", newImg);
   });
 
   // Switch to default img if #nav is left
-  $('#nav').mouseleave(function() {
-    var defaultImg = $('#default-splash').css('background-image');
-    $('#splash').css('background-image', defaultImg);
+  $("#nav").mouseleave(function() {
+    var defaultImg = $("#default-splash").css("background-image");
+    $("#splash").css("background-image", defaultImg);
   });
 </script>
-

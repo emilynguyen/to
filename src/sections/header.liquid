@@ -27,7 +27,7 @@
 
 
 
-<div class="sidebar-container header {% if template.name == "collection" %}white collection{% endif %}">
+<div id="sidebar-container" class="header {% if template.name == "collection" %}white-desktop collection{% endif %}">
 <!-- PLACEHOLDER TO MAINTAIN SIDEBAR WIDTH -->
   <div class="placeholder">
     {% if settings.logo != blank %}
@@ -113,7 +113,7 @@
         <a class="nav-header {% if "/pages/story" == request.path %}active{% endif %}" href="/pages/story">About Us</a>
 
         <!-- top nav -->
-       
+        <div class="mobile-top-nav">
             {% if shop.customer_accounts_enabled %}
                 {% if customer %}
             
@@ -135,15 +135,18 @@
 
           
                 <form class="search" action="/search">
-                    <label>Search</label>
+                    <label style="display: block;">Search</label>
                     <input class="search-input" type="text" name="q" value="{{ search.terms | escape }}"  />
                     <input class="search-submit" type="submit" value="Search" />
                 </form>
             
       
-       
+              </div>
+
       </nav>
   </div>
+
+  <!-- sideways title -->
   {% if template.name == "index" %} 
   <div id="sideways-title" class="medium-down--hide">
     {% if settings.sideways_title != blank %}
@@ -266,3 +269,5 @@
     }
   </script>
 {% endif %}
+
+
