@@ -2,10 +2,6 @@
 This page represents the /collections and /products pages.
 -->
 
-<div id="collection-counter" class="medium-down--hide">
-  <span class="num">1</span>/<span class="denom">0</span>
-</div>
-
 {% for link in linklists.shop-collections.links %} {% assign collection =
 link.object %} {% unless collection.handle == 'frontpage' %}
 <div class="collection-container" data-section-name="{{ collection.title }}">
@@ -30,6 +26,9 @@ link.object %} {% unless collection.handle == 'frontpage' %}
     </div>
   </a>
   <div class="collection-info medium-down--hide">
+    <div id="collection-counter" class="large-down--hide">
+      <span class="num">1</span>/<span class="denom">0</span>
+    </div>
     <h1>{{ collection.title }}</h1>
     <div class="collection-preview">
       <div class="grid">

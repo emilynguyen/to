@@ -1,10 +1,10 @@
 <div id="page">
-  <h1>{{ page.title }}</h1>
-  <div class="rte">
+  <div class="page-content">
+    <h1>{{ page.title }}</h1>
     {{ page.content }}
   </div>
+  <div class="page-spacer"></div>
 </div>
-
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -12,9 +12,9 @@
   crossorigin="anonymous"
 ></script>
 <script>
-    // Set padding-right = sidebar
-    $(window).on('load resize', function () {
-      var sidebarWidth = $("#side").innerWidth();
-      $('#page').css('padding-right', sidebarWidth);
-    });
-  </script>
+  // Set padding-right = sidebar
+  $(window).on("load resize", function() {
+    var sidebarWidth = $("#side").innerWidth();
+    $(".page-spacer").css("width", sidebarWidth);
+  });
+</script>

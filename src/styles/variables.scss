@@ -46,8 +46,12 @@ $spacer-4: $spacer-3 * 2;
 
 // Grid
 $grid-medium: 480px;
-$grid-large: 1024px;
-$grid-widescreen: 1800px;
+//$grid-medium: 600px;
+
+//$grid-large: 1024px;
+$grid-large: 960px;
+
+$grid-widescreen: 1280px;
 $grid-max-width: 1800px;
 $grid-gutter: $spacer-2;
 $grid-gutter-mobile: $spacer-1;

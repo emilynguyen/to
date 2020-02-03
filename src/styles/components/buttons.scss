@@ -8,4 +8,17 @@
   text-decoration: none;
   user-select: none;
   appearance: none;
+  // custom
+  background-color: #000;
+  color: #fff;
+  @extend .small;
+  padding: 1rem 2rem;
+  font-family: inherit;
+  font-weight: bold;
+  border: 1px solid #000;
+  transition: background-color 0.3s, color 0.3s;
+  @include hover {
+    background-color: #fff;
+    color: #000;
+  }
 }
