@@ -1,0 +1,21 @@
+{% if settings.show_related_products %} {% if collection == null or
+collection.handle == 'frontpage' or collection.handle == 'all' %} {% assign
+found_a_collection = false %} {% for c in product.collections %} {% if
+found_a_collection == false and c.handle != 'frontpage' and c.handle != 'all' %}
+{% assign found_a_collection = true %} {% assign collection = c %} {% endif %}
+{% endfor %} {% endif %} {% if collection and collection.products_count > 1 %}
+{% assign current_product = product %}
+
+<div class="related-products">
+  <h2>{{ settings.related_products_title }}</h2>
+  <ul class="product-list cf">
+    {% assign current_product_found = false %} {% for product in
+    collection.products limit: 5 %} {% if product.handle ==
+    current_product.handle %} {% assign current_product_found = true %} {% else
+    %} {% unless current_product_found == false and forloop.last %} {% include
+    'snippet-product-item' %} {% endunless %} {% endif %} {% endfor %}
+  </ul>
+</div>
+<!-- .related-products -->
+
+{% endif %} {% endif %}

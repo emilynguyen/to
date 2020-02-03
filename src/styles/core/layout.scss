@@ -94,12 +94,8 @@ html {
     width: 100%;
     height: 0;
     padding-top: 150%;
-    // padding-top: 125%;
-    //display: flex;
-    //justify-content: center;
-    //align-items: center;
-    width: 100%;
     position: relative;
+    background-color: $light-gray;
     img {
       top: 0;
       position: absolute;
@@ -369,6 +365,9 @@ nav {
     padding-right: $side-margin;
     padding-bottom: $side-margin;
   }
+  .page-content {
+    width: 100%;
+  }
   .page-spacer {
     @include media-query(medium-down) {
       display: none;
@@ -380,5 +379,89 @@ nav {
         font-size: 200%;
       }
     }
+  }
+}
+
+#product-images-container {
+  //  overflow: hidden;
+  width: 100%;
+  height: 0;
+  padding-top: 150%;
+  position: relative;
+  .arrow-container {
+    position: absolute;
+    color: #000;
+    display: flex;
+    bottom: $side-margin / 2;
+    right: $side-margin / 2;
+    @include media-query(small) {
+      bottom: $side-margin;
+      right: $side-margin;
+    }
+    .arrow {
+      user-select: none;
+      line-height: 0;
+      height: 5rem;
+      width: 5rem;
+      border: 1px solid #000;
+      border-radius: 4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      @include media-query(small) {
+      }
+    }
+    .prev {
+      margin-right: $side-margin / 4;
+      @include media-query(medium) {
+        margin-right: $side-margin / 3;
+      }
+      @include media-query(small) {
+        margin-right: $side-margin / 1.5;
+      }
+    }
+    .next {
+    }
+    .prev,
+    .next {
+      transition: transform 0.3s;
+      @include hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+  .counter {
+    position: absolute;
+    top: $side-margin / 2;
+    left: $side-margin / 2;
+    @include media-query(small) {
+      top: $side-margin;
+      left: $side-margin;
+    }
+  }
+  ul {
+    // overflow: scroll;
+    // background-color: red;
+    position: absolute;
+    top: 0;
+    left: 0;
+    // display: flex;
+    height: 100%;
+    width: 100%;
+  }
+  li {
+    height: 100%;
+    width: 100%;
+    background-color: $light-gray;
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 }

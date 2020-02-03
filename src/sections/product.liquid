@@ -7,7 +7,7 @@
 
 
     
-      <div class="grid">
+      <div class="grid mb-3">
         <div class="grid__item medium-up--one-half">
           {%- assign current_variant = product.selected_or_first_available_variant -%}
           {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
@@ -19,6 +19,7 @@
               {%- endunless -%}
             {% endcapture %}
         
+            <!--
             {% include 'responsive-image' with
               image: image,
               max_width: 700,
@@ -27,9 +28,11 @@
               wrapper_class: wrapper_class,
               wrapper_attributes: "data-product-image-wrapper",
             %}
+            -->
           {% endfor %}
         
-          {% if product.images.size > 1 %}
+          {% if product.images.size > 0 %}
+          <!--
             <ul>
               {% for image in product.images %}
                 <li>
@@ -39,6 +42,31 @@
                 </li>
               {% endfor %}
             </ul>
+            -->
+            <div id="product-images-container" class="small--mb-2">
+              <ul id="product-images">
+                {% for image in product.images %}
+                  <li {% if forloop.first == true %}class="active"{% endif %}>
+                    
+                      <img src="{{ image.src | img_url: 'master' }}" alt="{{ image.alt | escape }}">
+                  
+                  </li>
+                {% endfor %}
+              </ul>
+              <div {% if product.images.size <= 1 %}class="hide"{% endif %}>
+                <div class="arrow-container">
+                  <div class="prev arrow">
+                    ←
+                  </div>
+                  <div class="next arrow">
+                    →
+                  </div>
+                </div>
+                <div class="counter small">
+                  <span class="num">1</span>/<span class="denom">0</span>
+                </div>
+              </div>
+            </div>
           {% endif %}
         </div>
         <div class="grid__item medium-up--one-half">
@@ -159,6 +187,18 @@
 
         </div>
       </div>
+
+      <!-- related products -->
+      <div class="grid">
+        <div class="grid__item one-third">
+          <h1>Related Products</h1>
+        </div>
+        <div class="grid__item two-thirds">
+          {% section ‘related-products’ %}
+
+
+        </div>
+      </div>
     
     
     
@@ -195,5 +235,38 @@
   $(window).on("load resize", function() {
     var sidebarWidth = $("#side").innerWidth();
     $(".page-spacer").css("width", sidebarWidth);
+  });
+</script>
+
+<script>
+  
+
+  
+  var INDEX = 0;
+  var $slideContainer = $('#product-images');
+  var $slides = $('#product-images li');
+  var LENGTH = $slides.length;
+  // set counter
+  $('#product-images-container .denom').text(LENGTH);
+
+  function showSlide(i) {
+    if (i < 0) {
+      i += LENGTH;
+    }
+    console.log("showSlide " + i);
+    i = i % LENGTH;
+   
+    $slides.eq(INDEX).removeClass('active');
+    $slides.eq(i).addClass('active');
+
+   INDEX = i;
+   $('#product-images-container .num').text(INDEX + 1);
+
+  }
+  $('.prev').click(function() {
+    showSlide(INDEX - 1);
+  });
+  $('.next').click(function() {
+    showSlide(INDEX + 1);
   });
 </script>

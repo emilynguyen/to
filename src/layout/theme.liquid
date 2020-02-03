@@ -116,8 +116,8 @@
     }
   });
 
-  // close menu on scroll
-  $(window).scroll(function() {
+  // close menu on scroll + resize
+  $(window).on("resize scroll", function() {
     var menuOpen = $("#hamburger:checked").length > 0;
     if (menuOpen) {
       $("#hamburger").prop("checked", false);
