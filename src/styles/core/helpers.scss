@@ -137,7 +137,22 @@
     .#{$name}mt-4 {
       margin-top: $spacer-4 !important;
     }
+    /* Margin right */
+    .#{$name}mr-1 {
+      margin-right: $spacer-1 !important;
+    }
 
+    .#{$name}mr-2 {
+      margin-right: $spacer-2 !important;
+    }
+
+    .#{$name}mr-3 {
+      margin-right: $spacer-3 !important;
+    }
+
+    .#{$name}mr-4 {
+      margin-right: $spacer-4 !important;
+    }
     /* Margin bottom */
     .#{$name}mb-1 {
       margin-bottom: $spacer-1 !important;

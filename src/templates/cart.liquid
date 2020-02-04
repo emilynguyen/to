@@ -49,10 +49,10 @@
                 {% endif %} {% endunless %} {% endfor %} {% endif %}
 
                 <a
-                  class="button"
+                  class="small link"
                   href="/cart/change?line={{ forloop.index }}&amp;quantity=0"
                 >
-                  <small>{{ "cart.general.remove" | t }}</small>
+                  {{ "cart.general.remove" | t }}
                 </a>
               </td>
               <td data-label="{{ 'cart.label.price' | t }}">
@@ -70,6 +70,7 @@
                 {% endif %}
               </td>
               <td data-label="{{ 'cart.label.quantity' | t }}">
+                <!--
                 <input
                   type="number"
                   name="updates[]"
@@ -77,7 +78,12 @@
                   value="{{ item.quantity }}"
                   min="0"
                   aria-label="{{ 'cart.general.item_quantity' | t }}"
-                />
+                /> -->
+                <div class="quantity-container">
+                    <span class="minus">–</span>
+                    <input class="quantity-input" type="number" id="updates_{{ item.key }}" name="updates[]" value="{{ item.quantity }}" min="1" aria-label="{{ 'cart.general.item_quantity' | t }}">
+                    <span class="plus">+</span>
+                  </div>
               </td>
               <td data-label="{{ 'cart.label.total' | t }}">
                 {{ item.line_price | money }}
@@ -97,24 +103,26 @@
       }}</textarea>
       {% endif %}
       -->
+      <div id="cart-summary">
+        <h3>{{ "cart.general.subtotal" | t }}</h3>
+        <p id="subtotal">{{ cart.total_price | money }}</p>
+        {% if cart.total_discounts > 0 %}
+        <p>{{ "cart.general.savings" | t }} {{ cart.total_discounts | money }}</p>
+        {% endif %}
+        <!--<p>{{ "cart.general.shipping_at_checkout" | t }}</p>-->
+        <input class="button secondary mr-1"
+          type="submit"
+          name="update"
+          value="{{ 'cart.general.update' | t }}"
+        />
+        <input
+          type="submit"
+          name="checkout"
+          class="button"
+          value="{{ 'cart.general.checkout' | t }}"
+        />
+      </div>
 
-      <h3>{{ "cart.general.subtotal" | t }}</h3>
-      <p>{{ cart.total_price | money }}</p>
-      {% if cart.total_discounts > 0 %}
-      <p>{{ "cart.general.savings" | t }} {{ cart.total_discounts | money }}</p>
-      {% endif %}
-      <!--<p>{{ "cart.general.shipping_at_checkout" | t }}</p>-->
-      <input
-        type="submit"
-        name="update"
-        value="{{ 'cart.general.update' | t }}"
-      />
-      <input
-        type="submit"
-        name="checkout"
-        class="button"
-        value="{{ 'cart.general.checkout' | t }}"
-      />
     </form>
     {% else %}
     <h1>{{ "cart.general.title" | t }}</h1>
@@ -146,4 +154,25 @@
     var sidebarWidth = $("#side").innerWidth();
     $(".page-spacer").css("width", sidebarWidth);
   });
+</script>
+
+<script>
+  /*
+var $input = $('.quantity-input').change(function() {
+  // update subtotal
+  var newQuantity = $(this).value();
+
+  var subtotal = $('#subtotal').text();
+  subtotal = subtotal.replace(/[$,]+/g,"");
+  subtotal = parseFloat(subtotal);
+});
+*/
+$('.plus').click(function() {
+  document.getElementsByClassName('quantity-input')[0].stepUp();
+  //$input.trigger('change');
+});
+$('.minus').click(function() {
+  document.getElementsByClassName('quantity-input')[0].stepDown();
+ // $input.trigger('change');
+});
 </script>

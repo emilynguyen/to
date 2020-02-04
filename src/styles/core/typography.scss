@@ -70,6 +70,8 @@ h6 {
   text-transform: uppercase;
   font-weight: normal;
   line-height: 100%;
+
+  
 }
 
 h1,
@@ -199,3 +201,11 @@ a {
 a:focus {
   color: inherit;
 }
+
+.link, p a {
+  text-decoration: underline;
+  @include hover {
+    text-decoration:none;
+  }
+}
+
