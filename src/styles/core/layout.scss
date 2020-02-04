@@ -125,6 +125,7 @@ html {
       left: 0;
       transition: transform 0.3s;
       transform: translateX(-100%);
+      z-index: 9999;
     }
   }
   #main {
@@ -380,6 +381,21 @@ nav {
       }
     }
   }
+  &.cart-page {
+    table {
+      width: 100%;
+      border-collapse:separate; 
+      border-spacing: 0 $side-margin; 
+
+    }
+    tr {
+      
+      
+    }
+    td {
+      border: 1px solid #000;
+    }
+  }
 }
 
 #product-images-container {
@@ -444,6 +460,7 @@ nav {
     // overflow: scroll;
     // background-color: red;
     position: absolute;
+ 
     top: 0;
     left: 0;
     // display: flex;
