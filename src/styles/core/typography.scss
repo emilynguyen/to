@@ -72,8 +72,12 @@ h6 {
   line-height: 100%;
 }
 
-h1 {
+h1,
+h2 {
   font-family: "Din";
+}
+
+h1 {
   font-size: 6vw;
   line-height: 95%;
   @include media-query(medium-down) {
@@ -142,6 +146,10 @@ h1 {
 */
 
 h2 {
+  font-size: 3.6rem;
+}
+
+h3 {
   font-size: 1.9rem;
   font-weight: bold;
 }

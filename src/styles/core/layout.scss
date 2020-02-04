@@ -384,16 +384,26 @@ nav {
   &.cart-page {
     table {
       width: 100%;
-      border-collapse:separate; 
-      border-spacing: 0 $side-margin; 
-
+      // border-collapse: separate;
+      // border-spacing: 0 $side-margin/2;
+    }
+    th {
+      @extend .small;
+      padding: $spacer-1;
     }
     tr {
-      
-      
+      border-bottom: 1px solid #000;
     }
     td {
-      border: 1px solid #000;
+      text-align: center;
+      padding: $spacer-2;
+      vertical-align: middle;
+      &:not(:first-child) {
+      }
+    }
+    img {
+      float: left;
+      //height: 100%;
     }
   }
 }
@@ -460,7 +470,7 @@ nav {
     // overflow: scroll;
     // background-color: red;
     position: absolute;
- 
+
     top: 0;
     left: 0;
     // display: flex;
