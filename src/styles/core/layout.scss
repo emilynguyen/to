@@ -77,6 +77,10 @@ html {
     padding-left: $side-margin;
     padding-right: $side-margin;
   }
+}
+
+#collection,
+.search-page {
   .available {
     img {
       transition: transform 0.4s;
@@ -87,20 +91,24 @@ html {
   }
   .soldout {
     text-decoration: line-through;
-    opacity: 0.17;
+    opacity: 0.3;
   }
-  .product-container {
-    overflow: hidden;
+}
+
+.product-container {
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  padding-top: 150%;
+  position: relative;
+  background-color: $light-gray;
+  img {
+    top: 0;
+    position: absolute;
     width: 100%;
-    height: 0;
-    padding-top: 150%;
-    position: relative;
-    background-color: $light-gray;
-    img {
-      top: 0;
-      position: absolute;
-      width: 100%;
-    }
+  }
+  p a {
+    text-decoration: none !important;
   }
 }
 
@@ -196,6 +204,7 @@ $hamburger-size: 60px;
   }
   .search-input {
     width: calc(100% - #{$side-margin});
+    font-size: 100%;
   }
   nav {
     height: 100%;
@@ -350,11 +359,11 @@ nav {
 
 #page {
   margin-top: $top-space;
+  margin-bottom: $top-space;
   display: flex;
+
   &:not(.product-page) {
-    h1:not(:last-child) {
-      margin-bottom: $spacer-2;
-    }
+    h1,
     h2,
     h3,
     p:not(:last-child) {
@@ -375,9 +384,6 @@ nav {
     }
   }
   &.product-page {
-    h1.unavailable {
-      //text-decoration: line-through;
-    }
     .price {
       @include media-query(large-up) {
         font-size: 200%;
@@ -385,10 +391,13 @@ nav {
       .unavailable {
         text-decoration: line-through;
         display: inline-block;
-      }
-      .sold-out {
-        text-decoration: none !important;
-        color: $teal;
+        &:after {
+          content: "Sold Out";
+          color: $teal;
+          text-decoration: none !important;
+          display: inline-block;
+          margin-left: 1rem;
+        }
       }
     }
   }
@@ -419,7 +428,7 @@ nav {
   }
 }
 
-#cart-summary { 
+#cart-summary {
   @include media-query(medium-up) {
     float: right;
   }
@@ -512,7 +521,8 @@ nav {
 
 .quantity-container {
   min-width: 8rem;
-  .plus, .minus {
+  .plus,
+  .minus {
     border: 1px solid #000;
     border-radius: 5rem;
     display: inline-block;
@@ -523,7 +533,7 @@ nav {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: transform .3s;
+    transition: transform 0.3s;
     user-select: none;
     @include hover {
       transform: scale(1.2);
@@ -532,27 +542,27 @@ nav {
 }
 
 .quantity-input {
- // border-bottom: 1px solid #000;
+  // border-bottom: 1px solid #000;
   text-align: center;
   width: 3rem;
-  &::-webkit-inner-spin-button, &::-webkit-outer-spin-button { 
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
     -webkit-appearance: none;
   }
-  
 }
 
 select {
-  font-size: .9em;
+  font-size: 0.9em;
   //min-width: 4em;
-  padding: .1em 2em .1em .5em;
-  
+  padding: 0.1em 2em 0.1em 0.5em;
+
   border: 1px solid #000;
   height: 34px;
   -webkit-appearance: none;
-    -webkit-border-radius: 0px;
-    background-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='20' height='20' viewBox='0 0 28 24'><path fill='%23444' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>");
-    background-position: 100% 60%;
-    background-repeat: no-repeat;
+  -webkit-border-radius: 0px;
+  background-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='20' height='20' viewBox='0 0 28 24'><path fill='%23444' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>");
+  background-position: 100% 60%;
+  background-repeat: no-repeat;
   /*
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -560,18 +570,50 @@ select {
   background: url(http://www.stackoverflow.com/favicon.ico) 96% / 15% no-repeat #fff; */
 }
 
-
 /* CAUTION: Internet Explorer hackery ahead */
 
-
 select::-ms-expand {
-    display: none; /* Remove default arrow in Internet Explorer 10 and 11 */
+  display: none; /* Remove default arrow in Internet Explorer 10 and 11 */
 }
 
 /* Target Internet Explorer 9 to undo the custom arrow */
-@media screen and (min-width:0\0) {
-    select {
-        background: none\9;
-        padding: 5px\9;
+@media screen and (min-width: 0\0) {
+  select {
+    background: none\9;
+    padding: 5px\9;
+  }
+}
+
+#page.login-page {
+  .page-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+  }
+  a {
+    display: inline-block;
+  }
+  #login-container {
+    width: 100%;
+    max-width: 30rem;
+    input {
+      @extend .small;
+      border-bottom: 1px solid #000;
+      display: inline-block;
+      &::placeholder {
+        opacity: 0.7;
+      }
+      &:not(.button) {
+        width: 100%;
+        padding: 1rem;
+      }
     }
+  }
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
 }

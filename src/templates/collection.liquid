@@ -11,7 +11,7 @@
   <div class="grid">
     {% for product in collection.products %}
     <div
-      class="grid__item  medium-up--one-half large-up--one-quarter  small--mb-2 mb-3 {% if product.available %}available{% else %}soldout{% endif %}"
+      class="grid__item  medium--one-half large-up--one-quarter  small--mb-2 mb-3 {% if product.available %}available{% else %}soldout{% endif %}"
     >
       {% if product.featured_image != blank %}
       <a href="{{ product.url | within: collection }}">
@@ -25,6 +25,7 @@
         </div>
       </a>
       {% endif %}
+
       <p class="mt-1">
         <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
       </p>

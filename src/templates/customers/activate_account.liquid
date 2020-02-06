@@ -1,29 +1,61 @@
-<h1>{{ 'customer.activate_account.title' | t }}</h1>
-<p>{{ 'customer.activate_account.subtext' | t }}</p>
+<div id="page" class="login-page">
+  <div class="page-content">
+    <h1>{{ "customer.activate_account.title" | t }}</h1>
+    <p>{{ "customer.activate_account.subtext" | t }}</p>
 
-{% form 'activate_customer_password' %}
-  {{ form.errors | default_errors }}
+    {% form 'activate_customer_password' %}
+    <div class="mb-2 text-teal">
+      {{ form.errors | default_errors }}
+    </div>
 
-  <p>
-    <label for="CustomerPassword" class="label-hidden">
-      {{ 'customer.activate_account.password' | t }}
-    </label>
-    <input type="password"
-      name="customer[password]"
-      id="CustomerPassword"
-      placeholder="{{ 'customer.activate_account.password' | t }}">
-  </p>
+    <p>
+      <label for="CustomerPassword" class="label-hidden">
+        {{ "customer.activate_account.password" | t }}
+      </label>
+      <input
+        type="password"
+        name="customer[password]"
+        id="CustomerPassword"
+        placeholder="{{ 'customer.activate_account.password' | t }}"
+      />
+    </p>
 
-  <p>
-    <label for="CustomerPasswordConfirmation" class="label-hidden">
-      {{ 'customer.activate_account.password_confirm' | t }}
-    </label>
-    <input type="password"
-      name="customer[password_confirmation]"
-      id="CustomerPasswordConfirmation"
-      placeholder="{{ 'customer.activate_account.password_confirm' | t }}">
-  </p>
+    <p>
+      <label for="CustomerPasswordConfirmation" class="label-hidden">
+        {{ "customer.activate_account.password_confirm" | t }}
+      </label>
+      <input
+        type="password"
+        name="customer[password_confirmation]"
+        id="CustomerPasswordConfirmation"
+        placeholder="{{ 'customer.activate_account.password_confirm' | t }}"
+      />
+    </p>
 
-  <input type="submit" class="button" value="{{ 'customer.activate_account.submit' | t }}">
-  <input type="submit" class="button button--secondary" name="decline" value="{{ 'customer.activate_account.cancel' | t }}">
-{% endform %}
+    <input
+      type="submit"
+      class="button"
+      value="{{ 'customer.activate_account.submit' | t }}"
+    />
+    <input
+      type="submit"
+      class="button button--secondary"
+      name="decline"
+      value="{{ 'customer.activate_account.cancel' | t }}"
+    />
+    {% endform %}
+  </div>
+  <div class="page-spacer"></div>
+</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"
+></script>
+<script>
+  $(window).on("load resize", function() {
+    var sidebarWidth = $("#side").innerWidth();
+    $(".page-spacer").css("width", sidebarWidth);
+  });
+</script>

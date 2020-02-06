@@ -6,61 +6,61 @@
  * @namespace product
  */
 
-import {getUrlWithVariant, ProductForm} from '@shopify/theme-product-form';
-import {formatMoney} from '@shopify/theme-currency';
-import {register} from '@shopify/theme-sections';
-import {forceFocus} from '@shopify/theme-a11y';
+import { getUrlWithVariant, ProductForm } from "@shopify/theme-product-form";
+import { formatMoney } from "@shopify/theme-currency";
+import { register } from "@shopify/theme-sections";
+import { forceFocus } from "@shopify/theme-a11y";
 
 const classes = {
-  hide: 'hide',
+  hide: "hide"
 };
 
 const keyboardKeys = {
-  ENTER: 13,
+  ENTER: 13
 };
 
 const selectors = {
-  submitButton: '[data-submit-button]',
-  submitButtonText: '[data-submit-button-text]',
-  comparePrice: '[data-compare-price]',
-  comparePriceText: '[data-compare-text]',
-  priceWrapper: '[data-price-wrapper]',
-  imageWrapper: '[data-product-image-wrapper]',
+  submitButton: "[data-submit-button]",
+  submitButtonText: "[data-submit-button-text]",
+  comparePrice: "[data-compare-price]",
+  comparePriceText: "[data-compare-text]",
+  priceWrapper: "[data-price-wrapper]",
+  imageWrapper: "[data-product-image-wrapper]",
   visibleImageWrapper: `[data-product-image-wrapper]:not(.${classes.hide})`,
-  imageWrapperById: (id) => `${selectors.imageWrapper}[data-image-id='${id}']`,
-  productForm: '[data-product-form]',
-  productPrice: '[data-product-price]',
-  thumbnail: '[data-product-single-thumbnail]',
-  thumbnailById: (id) => `[data-thumbnail-id='${id}']`,
-  thumbnailActive: '[data-product-single-thumbnail][aria-current]',
+  imageWrapperById: id => `${selectors.imageWrapper}[data-image-id='${id}']`,
+  productForm: "[data-product-form]",
+  productPrice: "[data-product-price]",
+  thumbnail: "[data-product-single-thumbnail]",
+  thumbnailById: id => `[data-thumbnail-id='${id}']`,
+  thumbnailActive: "[data-product-single-thumbnail][aria-current]"
 };
 
-register('product', {
+register("product", {
   async onLoad() {
     const productFormElement = document.querySelector(selectors.productForm);
 
     this.product = await this.getProductJson(
-      productFormElement.dataset.productHandle,
+      productFormElement.dataset.productHandle
     );
     this.productForm = new ProductForm(productFormElement, this.product, {
-      onOptionChange: this.onFormOptionChange.bind(this),
+      onOptionChange: this.onFormOptionChange.bind(this)
     });
 
     this.onThumbnailClick = this.onThumbnailClick.bind(this);
     this.onThumbnailKeyup = this.onThumbnailKeyup.bind(this);
 
-    this.container.addEventListener('click', this.onThumbnailClick);
-    this.container.addEventListener('keyup', this.onThumbnailKeyup);
+    this.container.addEventListener("click", this.onThumbnailClick);
+    this.container.addEventListener("keyup", this.onThumbnailKeyup);
   },
 
   onUnload() {
     this.productForm.destroy();
-    this.removeEventListener('click', this.onThumbnailClick);
-    this.removeEventListener('keyup', this.onThumbnailKeyup);
+    this.removeEventListener("click", this.onThumbnailClick);
+    this.removeEventListener("keyup", this.onThumbnailKeyup);
   },
 
   getProductJson(handle) {
-    return fetch(`/products/${handle}.js`).then((response) => {
+    return fetch(`/products/${handle}.js`).then(response => {
       return response.json();
     });
   },
@@ -98,7 +98,7 @@ register('product', {
     }
 
     const visibleFeaturedImageWrapper = this.container.querySelector(
-      selectors.visibleImageWrapper,
+      selectors.visibleImageWrapper
     );
 
     forceFocus(visibleFeaturedImageWrapper);
@@ -107,7 +107,7 @@ register('product', {
   renderSubmitButton(variant) {
     const submitButton = this.container.querySelector(selectors.submitButton);
     const submitButtonText = this.container.querySelector(
-      selectors.submitButtonText,
+      selectors.submitButtonText
     );
 
     if (!variant) {
@@ -116,9 +116,11 @@ register('product', {
     } else if (variant.available) {
       submitButton.disabled = false;
       submitButtonText.innerText = theme.strings.addToCart;
+      submitButton.classList.remove("unavailable");
     } else {
       submitButton.disabled = true;
       submitButtonText.innerText = theme.strings.soldOut;
+      submitButton.classList.add("unavailable");
     }
   },
 
@@ -134,13 +136,18 @@ register('product', {
   renderPrice(variant) {
     const priceElement = this.container.querySelector(selectors.productPrice);
     const priceWrapperElement = this.container.querySelector(
-      selectors.priceWrapper,
+      selectors.priceWrapper
     );
 
     priceWrapperElement.classList.toggle(classes.hide, !variant);
 
     if (variant) {
       priceElement.innerText = formatMoney(variant.price, theme.moneyFormat);
+      if (variant.available) {
+        priceElement.classList.remove("unavailable");
+      } else {
+        priceElement.classList.add("unavailable");
+      }
     }
   },
 
@@ -150,10 +157,10 @@ register('product', {
     }
 
     const comparePriceElement = this.container.querySelector(
-      selectors.comparePrice,
+      selectors.comparePrice
     );
     const compareTextElement = this.container.querySelector(
-      selectors.comparePriceText,
+      selectors.comparePriceText
     );
 
     if (!comparePriceElement || !compareTextElement) {
@@ -163,12 +170,12 @@ register('product', {
     if (variant.compare_at_price > variant.price) {
       comparePriceElement.innerText = formatMoney(
         variant.compare_at_price,
-        theme.moneyFormat,
+        theme.moneyFormat
       );
       compareTextElement.classList.remove(classes.hide);
       comparePriceElement.classList.remove(classes.hide);
     } else {
-      comparePriceElement.innerText = '';
+      comparePriceElement.innerText = "";
       compareTextElement.classList.add(classes.hide);
       comparePriceElement.classList.add(classes.hide);
     }
@@ -176,26 +183,26 @@ register('product', {
 
   renderActiveThumbnail(id) {
     const activeThumbnail = this.container.querySelector(
-      selectors.thumbnailById(id),
+      selectors.thumbnailById(id)
     );
     const inactiveThumbnail = this.container.querySelector(
-      selectors.thumbnailActive,
+      selectors.thumbnailActive
     );
 
     if (activeThumbnail === inactiveThumbnail) {
       return;
     }
 
-    inactiveThumbnail.removeAttribute('aria-current');
-    activeThumbnail.setAttribute('aria-current', true);
+    inactiveThumbnail.removeAttribute("aria-current");
+    activeThumbnail.setAttribute("aria-current", true);
   },
 
   renderFeaturedImage(id) {
     const activeImage = this.container.querySelector(
-      selectors.visibleImageWrapper,
+      selectors.visibleImageWrapper
     );
     const inactiveImage = this.container.querySelector(
-      selectors.imageWrapperById(id),
+      selectors.imageWrapperById(id)
     );
 
     activeImage.classList.add(classes.hide);
@@ -206,11 +213,11 @@ register('product', {
     const enableHistoryState = this.productForm.element.dataset
       .enableHistoryState;
 
-    if (!variant || enableHistoryState !== 'true') {
+    if (!variant || enableHistoryState !== "true") {
       return;
     }
 
     const url = getUrlWithVariant(window.location.href, variant.id);
-    window.history.replaceState({path: url}, '', url);
-  },
+    window.history.replaceState({ path: url }, "", url);
+  }
 });

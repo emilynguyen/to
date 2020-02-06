@@ -1,51 +1,100 @@
-<h1>{{ 'customer.register.title' | t }}</h1>
+<div id="page" class="login-page">
+  <div class="page-content">
+    <div id="login-container">
+      <h1>{{ "customer.register.title" | t }}</h1>
 
-{% form 'create_customer' %}
-  {{ form.errors | default_errors }}
+      {% form 'create_customer' %}
+      <div class="mb-2 text-teal">
+        {{ form.errors | default_errors }}
+      </div>
 
-  <label for="FirstName" class="label-hidden">
-    {{ 'customer.register.first_name' | t }}
-  </label>
-  <input type="text"
-    name="customer[first_name]"
-    id="FirstName"
-    placeholder="{{ 'customer.register.first_name' | t }}"
-    autofocus
-    {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
+      <label for="FirstName" class="label-hidden">
+        {{ "customer.register.first_name" | t }}
+      </label>
+      <input
+        class="mb-1"
+        type="text"
+        name="customer[first_name]"
+        id="FirstName"
+        placeholder="{{ 'customer.register.first_name' | t }}"
+        autofocus
+        {%
+        if
+        form.first_name
+        %}value="{{ form.first_name }}"
+        {%
+        endif
+        %}
+      />
 
-  <label for="LastName" class="label-hidden">
-    {{ 'customer.register.last_name' | t }}
-  </label>
-  <input type="text"
-    name="customer[last_name]"
-    id="LastName"
-    placeholder="{{ 'customer.register.last_name' | t }}"
-    {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
+      <label for="LastName" class="label-hidden">
+        {{ "customer.register.last_name" | t }}
+      </label>
+      <input
+        class="mb-1"
+        type="text"
+        name="customer[last_name]"
+        id="LastName"
+        placeholder="{{ 'customer.register.last_name' | t }}"
+        {%
+        if
+        form.last_name
+        %}value="{{ form.last_name }}"
+        {%
+        endif
+        %}
+      />
 
-  <label for="Email" class="label-hidden">
-    {{ 'customer.register.email' | t }}
-  </label>
-  <input type="email"
-    name="customer[email]"
-    id="Email"
-    class="{% if form.errors contains 'email' %}input-error{% endif %}"
-    placeholder="{{ 'customer.register.email' | t }}"
-    value="{% if form.email %}{{ form.email }}{% endif %}"
-    spellcheck="false"
-    autocomplete="off"
-    autocapitalize="off">
+      <label for="Email" class="label-hidden">
+        {{ "customer.register.email" | t }}
+      </label>
+      <input
+        type="email"
+        name="customer[email]"
+        id="Email"
+        class="{% if form.errors contains 'email' %}input-error{% endif %} mb-1"
+        placeholder="{{ 'customer.register.email' | t }}"
+        value="{% if form.email %}{{ form.email }}{% endif %}"
+        spellcheck="false"
+        autocomplete="off"
+        autocapitalize="off"
+      />
 
-  <label for="CreatePassword" class="label-hidden">
-    {{ 'customer.register.password' | t }}
-  </label>
-  <input type="password"
-    name="customer[password]"
-    id="CreatePassword"
-    class="{% if form.errors contains 'password' %}input-error{% endif %}"
-    placeholder="{{ 'customer.register.password' | t }}">
+      <label for="CreatePassword" class="label-hidden">
+        {{ "customer.register.password" | t }}
+      </label>
+      <input
+        type="password"
+        name="customer[password]"
+        id="CreatePassword"
+        class="{% if form.errors contains 'password' %}input-error{% endif %} mb-2"
+        placeholder="{{ 'customer.register.password' | t }}"
+      />
 
-  <p>
-    <input type="submit" value="{{ 'customer.register.submit' | t }}" class="button">
-  </p>
-  <a href="{{ shop.url }}">{{ 'customer.register.cancel' | t }}</a>
-{% endform %}
+      <p>
+        <input
+          type="submit"
+          value="{{ 'customer.register.submit' | t }}"
+          class="button mb-2"
+        />
+      </p>
+      <p>
+        <a class="link small" href="/">{{ "customer.login.cancel" | t }}</a>
+      </p>
+      {% endform %}
+    </div>
+  </div>
+  <div class="page-spacer"></div>
+</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"
+></script>
+<script>
+  $(window).on("load resize", function() {
+    var sidebarWidth = $("#side").innerWidth();
+    $(".page-spacer").css("width", sidebarWidth);
+  });
+</script>
