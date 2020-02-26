@@ -12,6 +12,9 @@
   @include media-query(medium-down) {
     margin-left: -$grid-gutter-mobile;
   }
+  @include media-query(widescreen) {
+    //  margin-left: -$grid-gutter-widescreen;
+  }
 }
 
 .grid__item {
@@ -20,6 +23,9 @@
   width: 100%;
   @include media-query(medium-down) {
     padding-left: $grid-gutter-mobile;
+  }
+  @include media-query(widescreen) {
+    //padding-left: $grid-gutter-widescreen;
   }
   &[class*="--push"] {
     position: relative;

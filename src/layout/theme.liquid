@@ -129,3 +129,13 @@
     event.stopPropagation();
   });
 </script>
+
+<script>
+  // select all for search input
+  $(".search-input").keydown(function(e) {
+    var evtobj = window.event ? event : e;
+    if (evtobj.keyCode == 65 && evtobj.metaKey) {
+      $(this).select();
+    }
+  });
+</script>

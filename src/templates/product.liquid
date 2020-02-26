@@ -1,7 +1,3 @@
-<h1>asdfasd</h1>
-
-
-
 
 <section data-section-id="{{ section.id }}" data-section-type="product">
 
@@ -12,7 +8,7 @@
   
   
       
-        <div class="grid mb-4">
+        <div class="grid">
           <div class="grid__item medium-up--one-half">
             {%- assign current_variant = product.selected_or_first_available_variant -%}
             {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
@@ -80,9 +76,7 @@
            <!-- PRICE -->
            <h3 class="mb-2 price">
             <div data-price-wrapper>
-              <span data-product-price class="{% unless current_variant.available %}unavailable{% endunless %} {% unless product.available %}unavailable{% endunless %}">
-                {{ current_variant.price | money }}
-              </span>
+              <span data-product-price class="{% unless current_variant.available %}unavailable{% endunless %} {% unless product.available %}unavailable{% endunless %}">{{ current_variant.price | money }}</span>
         
               {% if product.compare_at_price_max > product.price %}
                 <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
@@ -107,24 +101,23 @@
            {% unless product.has_only_default_variant %}
            <div class="grid">
              {% for option in product.options_with_values %}
-               <div class="grid__item medium-up--one-half">
+               <div class="grid__item mb-2 product-options">
            
                  <div class="js">
             <!-- VARIANTS -->
-                  {% if option.name == "Size" %}
+                  {% if option.name == "Size" or option.name == "Color" %}
                    <!-- radio -->
-                   <h3 class="mb-1">{{ option.name }}</h3>
-                   {% for value in option.values %}
-                   <input type="radio" id="Option{{ option.position }}-{{ value }}" name="options[{{ option.name }}]" value="{{ value }}"{% if option.selected_value == value %} checked{% endif %}>
-                   <label for="Option{{ option.position }}-{{ value }}">{{ value }}</label>
-                 {% endfor %}
+                   <div class="{% if option.name == "Size" %}radio{% endif %} {% if option.name == "Color" %}color-radio{% endif %}">
+                    <h3 class="mb-1">{{ option.name }}</h3>
+                    {% for value in option.values %}
+                      <input type="radio" id="Option{{ option.position }}-{{ value }}" name="options[{{ option.name }}]" value="{{ value }}"{% if option.selected_value == value %} checked{% endif %}>
+                   <label for="Option{{ option.position }}-{{ value }}" {% if option.name == "Color" %}style="background-color: {{value}}"{% endif %}>{{ value }}</label>
+                    {% endfor %}
+                    </div>
                   {% else %}
             
-           
-                  
-
+          
                    <!-- dropdown -->
-                   <div class="mb-2">
                      <label for="Option{{ option.position }}">
                      <h3 class="mb-1">{{ option.name }}</h3>
                      </label>
@@ -140,7 +133,6 @@
                            </option>
                          {% endfor %}
                        </select>
-                   </div>
 
                    {% endif %}
            
@@ -182,7 +174,7 @@
            
            <!-- SUBMIT -->
            <div>
-             <button class="button {% if !product.available or !current_variant.available %}unavailable{% endif %}"
+             <button class="button {% unless product.available %}unavailable{% endunless %}"
                type="submit"
                name="add"
                data-submit-button
@@ -297,42 +289,87 @@
   });
   </script>
 
-<div id="variants" style="display: non" class="mb-4">
 
-  
-  {%for variant in product.variants%}
-<span class="title">{{variant.title}}</span> | {{variant.available}} <br>
-{%endfor%}
 
-</div>
-
-<textarea id="variant" class="mb-4">{{product.selected_or_first_available_variant | json}}
+<textarea id="variant" class="mb-4 hide">{{product.selected_or_first_available_variant | json}}
 </textarea>
 <script>
 
 var variants = {{product.variants | json}}
 var numOptions = {{ product.options.size }}
 
+// disable option1 options if unavailable
+if (numOptions >= 1) {
+ // var currVariant = JSON.parse($('#variant').text());
+  var firstOption = {{product.options_with_values.first | json}}
+  var firstOptionVals = firstOption.values;
+
+
+  for (var i = 0; i < firstOptionVals.length; i++) {
+    var currVal = firstOptionVals[i];
+
+    // make a copy of variants to filter
+    var variantsOfCurrVal = variants;
+    variantsOfCurrVal = variantsOfCurrVal.filter(function(x){return x.option1 == currVal; });
+
+    // for currVal, check if any of its variants are available
+    var available = false;
+    for (var j = 0; j < variantsOfCurrVal.length; j++) {
+      if (variantsOfCurrVal[j].available) {
+        available = true;
+        break;
+      }
+    }
+
+    // if available is false, disable currVal
+    if (!available) {
+      $('*[value="' + currVal + '" ]').attr('disabled', 'disabled');
+      console.log("disable " + currVal);
+    }
+    
+  }
+}
 
 $("#variant").change(function() {
-  var currVariant = JSON.parse($('#variant').text());
-  var option1 = currVariant.option1;
-  var variantsOfOption1 = variants;
-  variantsOfOption1 = variantsOfOption1.filter(function(x){return x.option1 == option1; });
 
-  // loop through all variants of size x
-  for (var i = 0; i < variantsOfOption1.length; i++) {
-    var currOption = variantsOfOption1[i].option2;
+  // link options if 2-3 options
+  if (numOptions > 1) {
+    var currVariant = JSON.parse($('#variant').text());
+    var option1 = currVariant.option1;
+    // make a copy of variants to filter
+    var variantsOfOption1 = variants;
+    variantsOfOption1 = variantsOfOption1.filter(function(x){return x.option1 == option1; });
 
-    // hide if unavailable
-    if (!variantsOfOption1[i].available) {
-      // find option and disable
-      $('option[value="' + currOption + '" ]').attr('disabled', 'disabled');
-    } else {
-      // find option and enable
-      $('option[value="' + currOption + '" ]').removeAttr('disabled');
+    // loop through all variants of option
+    for (var i = 0; i < variantsOfOption1.length; i++) {
+      var currOption = variantsOfOption1[i].option2;
+
+      if (!variantsOfOption1[i].available) {
+        $('*[value="' + currOption + '" ]').attr('disabled', 'disabled');
+      } else {
+        $('*[value="' + currOption + '" ]').removeAttr('disabled');
+      }
     }
-  }
+
+    // repeat for option 3 if necessary
+    if (numOptions == 3) {
+      var option2 = currVariant.option2;
+      // make a copy of variants to filter
+      var variantsOfOption2 = variants;
+      variantsOfOption2 = variantsOfOption2.filter(function(x){return x.option2 == option2; });
+
+      // loop through all variants of option
+      for (var i = 0; i < variantsOfOption2.length; i++) {
+        var currOption = variantsOfOption2[i].option3;
+
+        if (!variantsOfOption2[i].available) {
+          $('option[value="' + currOption + '" ]').attr('disabled', 'disabled');
+        } else {
+          $('option[value="' + currOption + '" ]').removeAttr('disabled');
+        }
+      }
+    }
+  } 
 
   }).trigger('change');
 
