@@ -1,6 +1,6 @@
 <div id="page" class="product-page search-page">
   <div class="page-content">
-    <!--  {% paginate search.results by 10 %} -->
+      {% paginate search.results by 10 %} 
 
     <h1 class="mb-3">
       {% if search.performed %}
@@ -42,10 +42,10 @@
     </h2>
 
     <div class="grid">
-      {% for item in search.results %} {% if item.object_type == 'product' %} {%
-      assign product = item %} {% endif %}
+      {% for item in search.results %} 
       <div
-        class="grid__item medium--one-half large-up--one-third small--mb-2 mb-3 {% if product.available %}available{% else %}soldout{% endif %}"
+        class="grid__item medium--one-half large-up--one-third small--mb-2 mb-3 {% if item.object_type == 'product' and item.available %}available{% elsif item.object_type == 'product' and !item.available %}
+           %}soldout{% endif %}"
       >
         <a href="{{ item.url | within: collection }}">
           {% assign featured_image = item.image | default: item.featured_image
@@ -94,9 +94,9 @@
       {% endfor %}
     </div>
 
-    <!--
+    
     {% if paginate.pages > 1 %} {% include 'pagination' %} {% endif %} {% endif
-    %} {% endif %} {% endpaginate %} -->
+    %} {% endif %} {% endpaginate %} 
   </div>
   <div class="page-spacer"></div>
 </div>

@@ -169,6 +169,22 @@
     .#{$name}mb-4 {
       margin-bottom: $spacer-4 !important;
     }
+    /* Margin left */
+    .#{$name}ml-1 {
+      margin-left: $spacer-1 !important;
+    }
+
+    .#{$name}ml-2 {
+      margin-left: $spacer-2 !important;
+    }
+
+    .#{$name}ml-3 {
+      margin-left: $spacer-3 !important;
+    }
+
+    .#{$name}ml-4 {
+      margin-left: $spacer-4 !important;
+    }
   }
 }
 

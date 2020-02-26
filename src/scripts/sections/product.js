@@ -72,8 +72,15 @@ register("product", {
     this.renderPrice(variant);
     this.renderComparePrice(variant);
     this.renderSubmitButton(variant);
-
     this.updateBrowserHistory(variant);
+
+    var variantDiv = document.getElementById('variant');
+    if (variantDiv) {
+      variantDiv.innerHTML = JSON.stringify(variant);
+      var event = new Event('change');
+      variantDiv.dispatchEvent(event);
+    }
+
   },
 
   onThumbnailClick(event) {

@@ -1,3 +1,33 @@
-<div class="pagination">
-  {{ paginate | default_pagination }}
+<div class="pagination small">
+ <!-- {{ paginate | default_pagination }} -->
+ {% if paginate.previous.is_link %}
+<a href="{{ paginate.previous.url }}" class="mr-1">Prev</a>
+{% endif %}
+
+  {% for part in (1..paginate.pages) %}
+  {% if forloop.index == 1 %}
+    {% if paginate.next.is_link %}
+      {%- assign next_page = current_page | plus: 1 -%}
+      {%- assign page_query_param_old = 'page=' | append: next_page -%}
+      {%- assign page_url_template = paginate.next.url -%}
+    {% elsif paginate.previous.is_link %}
+      {%- assign previous_page = current_page | minus: 1 -%}
+      {%- assign page_query_param_old = 'page=' | append: previous_page -%}
+      {%- assign page_url_template = paginate.previous.url -%}
+    {% else %}
+      {%- assign page_query_param_old = 'page=page' -%}
+      {%- assign page_url_template = collection.url | append: '?page=page' -%}
+    {% endif %}
+  {% endif %}
+  {%- assign page_query_param_new = 'page=' | append: forloop.index -%}
+  {%- assign page_url = page_url_template | replace: page_query_param_old, page_query_param_new -%}
+
+  <li class="page {% if paginate.current_page == part %}active{% endif %}">
+    <a class="page__number" href="{{ page_url }}">{{ forloop.index }}</a>
+  </li>
+{% endfor %}
+
+{% if paginate.next.is_link %}
+<a href="{{ paginate.next.url }}" class="ml-1">Next</a>
+{% endif %}
 </div>

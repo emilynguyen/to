@@ -10,7 +10,10 @@
   }}{% else %}{{ first_collection.image | img_url: 'master' }}{% endif %}');"
 ></div>
 
-<!-- splash container -->
+<!-- actual splash container -->
+{% if settings.home_image_default == blank %}
+  <a href="{{ first_collection.url }}">
+{% endif %}
 <div
   id="splash"
   style="background-image: url(' {% if settings.home_image_default != blank %}{{
@@ -21,9 +24,12 @@
     <div>
       <h1 class="mb-1">{{ shop.name }}</h1>
       <a href="/collections" title=""><h3>Shop Now →</h2></a>
-    </div>
+    </div> 
   </div>
 </div>
+{% if settings.home_image_default == blank %}
+  </a>
+{{% endif %}}
 
 <!-- load collection images-->
 <ul id="home-images">
@@ -55,9 +61,14 @@
     $("#splash").css("background-image", newImg);
   });
 
-  // Switch to default img if #nav is left
+  // switch to default img if #nav is left
   $("#nav").mouseleave(function() {
     var defaultImg = $("#default-splash").css("background-image");
     $("#splash").css("background-image", defaultImg);
+  });
+
+  // link splash
+  $('#splash').click(function() {
+
   });
 </script>

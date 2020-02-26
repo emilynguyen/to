@@ -204,11 +204,14 @@ $hamburger-size: 60px;
   }
   .search-input {
     width: calc(100% - #{$side-margin});
-    font-size: 100%;
   }
   nav {
     height: 100%;
   }
+}
+
+.search-input {
+font-size: 100% !important;
 }
 
 .mobile-top-nav {
@@ -616,4 +619,27 @@ select::-ms-expand {
 textarea:focus,
 input:focus {
   outline: none;
+}
+*:focus {
+  outline: none;
+}
+
+.pagination {
+  .active {
+    //font-weight: bold;
+    color: $teal;
+  }
+  ul {
+    list-style: none;
+  }
+  li {
+    display: inline-block;
+    
+    &.page {
+      &:not(:last-of-type) {
+        margin-right: 1rem;
+      }
+    }
+  }
+
 }

@@ -1,4 +1,6 @@
-<h1>slakfdjskdlfjaslk</h1>
+<h1>asdfasd</h1>
+
+
 
 
 <section data-section-id="{{ section.id }}" data-section-type="product">
@@ -78,7 +80,7 @@
            <!-- PRICE -->
            <h3 class="mb-2 price">
             <div data-price-wrapper>
-              <span data-product-price {% if !product.available or !current_variant.available %}class="unavailable"{% endif %}>
+              <span data-product-price class="{% unless current_variant.available %}unavailable{% endunless %} {% unless product.available %}unavailable{% endunless %}">
                 {{ current_variant.price | money }}
               </span>
         
@@ -92,104 +94,110 @@
               {% endif %}
               
             </div>
-            {% unless product.available %}<span class="sold-out"> Sold Out</span>{% endunless %}
+           
            </h3>
            <div class="mb-2">
             <p>{{ product.description }}</p>
-  
+
            </div>
+           
           
-          
-            {% form 'product', product, data-product-form: '', data-product-handle: product.handle, data-enable-history-state: 'true' %}
-              {% unless product.has_only_default_variant %}
-              <div class="grid">
-                {% for option in product.options_with_values %}
-                  <div class="grid__item medium-up--one-half">
-  
-                    <div class="js">
+           {% if product.available %}
+           {% form 'product', product, data-product-form: '', data-product-handle: product.handle, data-enable-history-state: 'true' %}
+           {% unless product.has_only_default_variant %}
+           <div class="grid">
+             {% for option in product.options_with_values %}
+               <div class="grid__item medium-up--one-half">
+           
+                 <div class="js">
+            <!-- VARIANTS -->
+                  {% if option.name == "Size" %}
+                   <!-- radio -->
+                   <h3 class="mb-1">{{ option.name }}</h3>
+                   {% for value in option.values %}
+                   <input type="radio" id="Option{{ option.position }}-{{ value }}" name="options[{{ option.name }}]" value="{{ value }}"{% if option.selected_value == value %} checked{% endif %}>
+                   <label for="Option{{ option.position }}-{{ value }}">{{ value }}</label>
+                 {% endfor %}
+                  {% else %}
             
-                      {% if forloop.index0 > 0 %}
-            
-                        {% for value in option.values %}
-                          <input type="radio" id="Option{{ option.position }}-{{ value }}" name="options[{{ option.name }}]" value="{{ value }}"{% if option.selected_value == value %} checked{% endif %}>
-                          <label for="Option{{ option.position }}-{{ value }}">{{ value }}</label>
-                        {% endfor %}
-            
-                      {% else %}
-            
-                      <!-- VARIANT -->
-                      <div class="mb-2">
-                        <label for="Option{{ option.position }}">
-                        <h3 class="mb-1">{{ option.name }}</h3>
-                        </label>
-            
-                          <select class="select-css"
-                            id="Option{{ option.position }}"
-                            name="options[{{ option.name | escape }}]">
-                            {% for value in option.values %}
-                              <option
-                                value="{{ value | escape }}"
-                                {% if option.selected_value == value %}selected="selected"{% endif %}>
-                                  {{ value }}
-                              </option>
-                            {% endfor %}
-                          </select>
-                      </div>
-  
-            
-                      {% endif %}
-                    </div>
-                    <!-- /.grid__item -->
-                  </div>
-                {% endfor %}
-  
-  
-                <!-- /.grid -->
-              </div>
-              {% endunless %}
-          
-              <noscript>
-                <select name="id">
-                  {% for variant in product.variants %}
-                    <option
-                      {% if variant == current_variant %}selected="selected"{% endif %}
-                      {% unless variant.available %}disabled="disabled"{% endunless %}
-                      value="{{ variant.id }}">
-                        {{ variant.title }}
-                    </option>
-                  {% endfor %}
-                </select>
-              </noscript>
-          
-              <!-- QUANTITY -->
-              <div class="mb-2">
-                  <label for="Quantity">
-                      <h3 class="mb-1">{{ 'products.product.quantity' | t }}</h3>
-                    </label>
-                <div class="quantity-container">
-                  <span class="minus" onclick="this.parentNode.querySelector('.quantity-input').stepDown()">–</span>
-                  <input class="quantity-input" type="number" id="Quantity" name="quantity" value="1" min="1">
-                  <span class="plus" onclick="this.parentNode.querySelector('.quantity-input').stepUp()">+</span>
-                </div>
-              </div>
-              
-              <!-- SUBMIT -->
-              <div>
-                <button class="button {% if !product.available or !current_variant.available %}unavailable{% endif %}"
-                  type="submit"
-                  name="add"
-                  data-submit-button
-                  {% unless current_variant.available %}disabled="disabled"{% endunless %}>
-                    <span data-submit-button-text>
-                      {% if current_variant.available %}
-                        {{ 'products.product.add_to_cart' | t }}
-                      {% else %}
-                        {{ 'products.product.sold_out' | t }}
-                      {% endif %}
-                    </span>
-                </button>
-              </div>
-            {% endform %}
+           
+                  
+
+                   <!-- dropdown -->
+                   <div class="mb-2">
+                     <label for="Option{{ option.position }}">
+                     <h3 class="mb-1">{{ option.name }}</h3>
+                     </label>
+           
+                       <select class="select-css"
+                         id="Option{{ option.position }}"
+                         name="options[{{ option.name | escape }}]">
+                         {% for value in option.values %}
+                           <option
+                             value="{{ value | escape }}"
+                             {% if option.selected_value == value %}selected="selected"{% endif %}>
+                               {{ value }}
+                           </option>
+                         {% endfor %}
+                       </select>
+                   </div>
+
+                   {% endif %}
+           
+           
+                 </div>
+                 <!-- /.grid__item -->
+               </div>
+             {% endfor %}
+           
+           
+             <!-- /.grid -->
+           </div>
+           {% endunless %}
+           
+           <noscript>
+             <select name="id">
+               {% for variant in product.variants %}
+                 <option
+                   {% if variant == current_variant %}selected="selected"{% endif %}
+                   {% unless variant.available %}disabled="disabled"{% endunless %}
+                   value="{{ variant.id }}">
+                     {{ variant.title }}
+                 </option>
+               {% endfor %}
+             </select>
+           </noscript>
+           
+           <!-- QUANTITY -->
+           <div class="mb-2">
+               <label for="Quantity">
+                   <h3 class="mb-1">{{ 'products.product.quantity' | t }}</h3>
+                 </label>
+             <div class="quantity-container">
+               <span class="minus" onclick="this.parentNode.querySelector('.quantity-input').stepDown()">–</span>
+               <input class="quantity-input" type="number" id="Quantity" name="quantity" value="1" min="1">
+               <span class="plus" onclick="this.parentNode.querySelector('.quantity-input').stepUp()">+</span>
+             </div>
+           </div>
+           
+           <!-- SUBMIT -->
+           <div>
+             <button class="button {% if !product.available or !current_variant.available %}unavailable{% endif %}"
+               type="submit"
+               name="add"
+               data-submit-button
+               {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+                 <span data-submit-button-text>
+                   {% if current_variant.available %}
+                     {{ 'products.product.add_to_cart' | t }}
+                   {% else %}
+                     {{ 'products.product.sold_out' | t }}
+                   {% endif %}
+                 </span>
+             </button>
+           </div>
+           {% endform %}
+           {% endif %}
           
       
           <div class="hide">
@@ -271,11 +279,70 @@
     });
   </script>
   
+
   <script>
-    $()
-  </script> {% schema %} { "name": "Product pages", "settings": [ {
-"type": "checkbox", "id": "show_share_buttons", "label": "Show social sharing
-buttons", "default": true } ] } {% endschema %}
+    $('.quantity-input').focusout(function() {
+   
+    var $input = $(this);
+    var min = $input.attr('min');
+
+    // delete leading 0s
+    $input.val($input.val().replace(/^0+/, ''));
+
+     // replace vals < min with 0
+    if ($input.val() < min) {
+      $input.val(min);
+    }
+
+  });
+  </script>
+
+<div id="variants" style="display: non" class="mb-4">
+
+  
+  {%for variant in product.variants%}
+<span class="title">{{variant.title}}</span> | {{variant.available}} <br>
+{%endfor%}
+
+</div>
+
+<textarea id="variant" class="mb-4">{{product.selected_or_first_available_variant | json}}
+</textarea>
+<script>
+
+var variants = {{product.variants | json}}
+var numOptions = {{ product.options.size }}
+
+
+$("#variant").change(function() {
+  var currVariant = JSON.parse($('#variant').text());
+  var option1 = currVariant.option1;
+  var variantsOfOption1 = variants;
+  variantsOfOption1 = variantsOfOption1.filter(function(x){return x.option1 == option1; });
+
+  // loop through all variants of size x
+  for (var i = 0; i < variantsOfOption1.length; i++) {
+    var currOption = variantsOfOption1[i].option2;
+
+    // hide if unavailable
+    if (!variantsOfOption1[i].available) {
+      // find option and disable
+      $('option[value="' + currOption + '" ]').attr('disabled', 'disabled');
+    } else {
+      // find option and enable
+      $('option[value="' + currOption + '" ]').removeAttr('disabled');
+    }
+  }
+
+  }).trigger('change');
+
+</script>
+
+
+
+  
+
+
 
 <script type="application/ld+json">
   {

@@ -81,7 +81,7 @@
                 /> -->
                 <div class="quantity-container">
                     <span class="minus">–</span>
-                    <input class="quantity-input" type="number" id="updates_{{ item.key }}" name="updates[]" value="{{ item.quantity }}" min="1" aria-label="{{ 'cart.general.item_quantity' | t }}">
+                    <input class="quantity-input" type="number" id="updates_{{ item.key }}" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="{{ 'cart.general.item_quantity' | t }}">
                     <span class="plus">+</span>
                   </div>
               </td>
@@ -175,4 +175,21 @@ $('.minus').click(function() {
   document.getElementsByClassName('quantity-input')[0].stepDown();
  // $input.trigger('change');
 });
+
+$('.quantity-input').focusout(function() {
+  // replace vals < min with 0
+  var $input = $(this);
+  var min = $input.attr('min');
+  
+  // delete leading 0s
+  $input.val($input.val().replace(/^0+/, ''));
+
+  // replace vals < min with 0
+  if ($input.val() < min) {
+  $input.val(min);
+  }
+
+});
 </script>
+
+
