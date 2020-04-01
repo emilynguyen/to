@@ -1,26 +1,15 @@
-
-
-
 <div id="page">
-    <div class="page-content">
-      
-        <h1>{{ 'general.404.title' | t }}</h1>
-        <p>{{ 'general.404.subtext_html' | t }}</p>
-      
-
-    </div>
-    <div class="page-spacer"></div>
+  <div class="page-content">
+    <h1>{{ "general.404.title" | t }}</h1>
+    <p>{{ "general.404.subtext_html" | t }}</p>
   </div>
-  
-  <script
-    src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous"
-  ></script>
-  <script>
-    // Set padding-right = sidebar
-    $(window).on("load resize", function() {
-      var sidebarWidth = $("#side").innerWidth();
-      $(".page-spacer").css("width", sidebarWidth);
-    });
-  </script>
+  <div class="page-spacer"></div>
+</div>
+
+<script>
+  // Set padding-right = sidebar
+  $(window).on("load resize", function() {
+    var sidebarWidth = $("#side").innerWidth();
+    $(".page-spacer").css("width", sidebarWidth);
+  });
+</script>

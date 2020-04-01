@@ -240,17 +240,17 @@
   
 
   
-  <script
-    src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous"
-  ></script>
   <script>
     $(window).on("load resize", function() {
       var sidebarWidth = $("#side").innerWidth();
       $(".page-spacer").css("width", sidebarWidth);
     });
   </script>
+
+  <!--
+  <script src="/assets/scripts/setSpacerWidth.js"></script>-->
+
+
   
   <script>
     $(window).on('load', function(){
@@ -304,49 +304,37 @@
       });
     }
 
+    $(window).mousemove(function(e) {
+      var bounds = $('#product-images-container')[0].getBoundingClientRect();
+      var arrowBounds = $('.arrow-container')[0].getBoundingClientRect();
 
-
-    var inArrowContainer = false;
-
-    $('#product-images-container').hover(function() {
-      $magnify.addClass('visible');
-    }, function() {
-      $magnify.removeClass('visible');
-    });
-    $('.arrow-container').hover(function() {
-      $magnify.removeClass('visible');
-    }, function() {
-      $magnify.addClass('visible');
-    });
-
-    $('#product-images-container').mousemove(function(e) {
-      var bounds = $(this)[0].getBoundingClientRect();
+      // check if magnifying glass is in bounds
+      if (e.pageX > bounds.left && e.pageX < bounds.right && e.pageY > bounds.top && e.pageY < bounds.bottom) {
+        // if inside, check if inside arrow container
+        if (e.pageX > arrowBounds.left && e.pageX < arrowBounds.right && e.pageY > arrowBounds.top && e.pageY < arrowBounds.bottom) {
+        $magnify.removeClass('visible');
+        }
+        else {
+          $magnify.addClass('visible');
+        }
+      }
+      else {
+        $magnify.removeClass('visible');
+      }
       var left = e.clientX - bounds.left;
       var top = e.clientY - bounds.top;
       var leftPercent = left / bounds.width;
       var topPercent = top / bounds.height;
-     // console.log(leftPercent +", " +topPercent);
-      var bgX = -bounds.width * ZOOM * leftPercent + 100 + "px";
-      var bgY = -bounds.height * ZOOM * topPercent + 100 +"px";
+      var bgX = -bounds.width * ZOOM * leftPercent + ($magnify.width() / 2) + "px";
+      var bgY = -bounds.height * ZOOM * topPercent + ($magnify.height() / 2) +"px";
       $magnify.css({
         left: left,
         top: top,
         backgroundPosition: bgX + " " + bgY
-        /*
-        backgroundPosition: (-left * ZOOM) + "px " + (-top * ZOOM) +"px" */
-        /*
-        backgroundPosition: (leftPercent) + "% " + (topPercent) + "%" */
-      });
 
-      
+      });   
     });
-
-/*
-    $(document).on('mousemove', function(e){
-    $('#your_div_id').css({
-       left:  e.pageX,
-       top:   e.pageY
-    }); */
+    
 
     });
   </script>
@@ -404,7 +392,7 @@ if (numOptions >= 1) {
     // if available is false, disable currVal
     if (!available) {
       $('*[value="' + currVal + '" ]').attr('disabled', 'disabled');
-      console.log("disable " + currVal);
+    //  console.log("disable " + currVal);
     }
     
   }

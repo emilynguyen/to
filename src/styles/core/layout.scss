@@ -13,10 +13,29 @@ html {
   box-sizing: border-box;
 }
 
-#logo {
+.logo {
   height: $logo-height;
   //@extend .mb-3;
   margin-bottom: calc(#{$side-margin} - 0.5vw);
+  @include media-query(small) {
+    width: 50%;
+  }
+  @include media-query(large-up) {
+    visibility: hidden;
+  }
+}
+
+#topbar-logo-container {
+  line-height: 0;
+  top: calc(#{$side-margin} - 1.5rem);
+  position: absolute;
+  left: $side-margin;
+}
+
+.topbar-logo {
+  height: $logo-height;
+  //@extend .mb-3;
+  // margin-bottom: calc(#{$side-margin} - 0.5vw);
   @include media-query(small) {
     width: 50%;
   }
@@ -68,7 +87,7 @@ html {
   width: 100vw;
   left: 0;
   background-color: white;
-  z-index: 99999;
+  z-index: 9999;
 
   padding-left: $side-margin * 2;
   padding-right: $side-margin * 2;
@@ -224,10 +243,46 @@ $hamburger-size: 60px;
 
 #topbar-container {
   position: fixed;
+  background-color: rgba(255, 255, 255, 0);
+  transition: background-color 0.5s, color 0.5s, border-color 0.5s;
   text-align: right;
-  top: calc(#{$side-margin} - 1rem);
-  right: $side-margin;
+  padding-top: calc(#{$side-margin} - 1rem);
+  padding-bottom: calc(#{$side-margin} - 1rem);
+  width: 100%;
+  padding-right: $side-margin;
+  right: 0;
   z-index: 99999;
+  @include media-query(medium-down) {
+    width: auto;
+  }
+  .topbar-logo.color {
+    display: none;
+  }
+  &:not(.list-collections).bg {
+    @include media-query(large-up) {
+      background-color: rgba(255, 255, 255, 0.95);
+      color: $color-body-text;
+      a {
+        @include hover {
+          color: initial;
+        }
+      }
+      .active,
+      input {
+        color: initial;
+      }
+      #item-count,
+      .search-input {
+        border-color: initial;
+      }
+      .topbar-logo.default {
+        display: none;
+      }
+      .topbar-logo.color {
+        display: block;
+      }
+    }
+  }
   @include media-query(small) {
     top: calc(#{$side-margin} - 0.7rem);
   }
@@ -236,9 +291,9 @@ $hamburger-size: 60px;
   }
   li {
     display: inline-block;
-    @include media-query(large-up) {
-      &:not(:last-child) {
-        // margin-right: $spacer-3;
+    &:not(:last-child) {
+      margin-right: 3.4vw;
+      @include media-query(widescreen) {
         margin-right: $side-margin;
       }
     }
@@ -343,6 +398,9 @@ nav {
     background: transparent;
     border-bottom: 1px solid $color-body-text;
     width: 10rem;
+    @include media-query(large) {
+      width: 8rem;
+    }
   }
   &-submit {
     visibility: hidden;

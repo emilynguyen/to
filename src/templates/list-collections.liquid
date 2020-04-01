@@ -1,7 +1,6 @@
 <!--
 This page represents the /collections and /products pages.
 -->
-
 {% for link in linklists.shop-collections.links %} {% assign collection =
 link.object %} {% unless collection.handle == 'frontpage' %}
 <div class="collection-container" data-section-name="{{ collection.title }}">
@@ -26,8 +25,14 @@ link.object %} {% unless collection.handle == 'frontpage' %}
     </div>
   </a>
   <div class="collection-info medium-down--hide">
+    <!--
     <div id="collection-counter" class="large-down--hide">
       <span class="num">1</span>/<span class="denom">0</span>
+    </div>
+    -->
+    <div id="collection-counter" class="mb-2">
+      <span>{{ forloop.index }}</span
+      >/<span>{{ forloop.length }}</span>
     </div>
     <h1>{{ collection.title }}</h1>
     <div class="collection-preview">
@@ -55,22 +60,11 @@ link.object %} {% unless collection.handle == 'frontpage' %}
 </div>
 {% endunless %} {% endfor %}
 
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"
-></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.19/jquery.scrollify.js"></script>
-<script>
-  $(function() {
-    $.scrollify({
-      section: ".example-classname"
-    });
-  });
-</script>
+
 <script>
   /*
+
   $(document).ready(function() {
     $("#collection-counter .denom").text($(".collection-container").length);
     $(function() {

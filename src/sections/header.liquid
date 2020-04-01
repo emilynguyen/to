@@ -75,7 +75,9 @@
 <div class="sidebar">
   <div>
       {% if settings.logo != blank %}
-        <a href="/"><img id="logo" src="{% if template.name == 'collection' %}{{ settings.logo_white | img_url }}{% else %}{{ settings.logo | img_url }}{% endif %}" alt="Triton Outfitters"></a>
+        <a href="/"><img class="logo medium-down--hide" src="{% if template.name == 'collection' %}{{ settings.logo_white | img_url }}{% else %}{{ settings.logo | img_url }}{% endif %}" alt="Triton Outfitters">
+        
+          <img class="logo large-up--hide" src="{{ settings.logo | img_url }}" alt="Triton Outfitters"></a>
       {% endif %}
 
       <nav role="navigation">

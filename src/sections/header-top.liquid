@@ -1,8 +1,12 @@
-<div id="topbar-container" class="header {% if template.name == "collection" or template.name == "index" %}white-desktop{% endif %} {% if template.name == "index" or template.name == "list-collections" or template.name == "collection" %}white-mobile{% endif %}">
+<div id="topbar-container" class="header {{template.name}} {% if template.name == "collection" or template.name == "index" %}white-desktop{% endif %} {% if template.name == "index" or template.name == "list-collections" or template.name == "collection" %}white-mobile{% endif %}">
     <div id="topbar">
 
 
-    
+        {% if settings.logo != blank %}
+        <a href="/" id="topbar-logo-container" class="medium-down--hide"><img class="topbar-logo default" src="{% if template.name == 'collection' %}{{ settings.logo_white | img_url }}{% else %}{{ settings.logo | img_url }}{% endif %}" alt="Triton Outfitters">
+        
+            <img class="topbar-logo color" src="{{ settings.logo | img_url }}" alt="Triton Outfitters"></a>
+      {% endif %}
 
        
         <ul>

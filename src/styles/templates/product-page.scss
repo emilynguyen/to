@@ -127,12 +127,12 @@ select::-ms-expand {
     padding: 5px\9;
   }
 }
-
+$magnify-diameter: 25rem;
 #magnify {
-  width: 25rem;
-  height: 25rem;
-  width: 200px;
-  height: 200px;
+  width: $magnify-diameter;
+  height: $magnify-diameter;
+  margin-top: -$magnify-diameter / 2;
+  margin-left: -$magnify-diameter / 2;
   border-radius: 50%;
   position: absolute;
   top: 0;
@@ -140,14 +140,16 @@ select::-ms-expand {
   z-index: 9999;
   border: 1px solid $color-body-text;
   background-repeat: no-repeat;
-  transition: opacity 0.2s, transform 0.2s;
-  transform: scale(0) translate(-50%, -50%);
+  transition: opacity 0.3s, transform 0.3s;
+  transform: scale(0);
   opacity: 0;
-  // background-size: 100% 100%;
-
   &.visible {
     cursor: none;
     opacity: 1;
-    transform: scale(1) translate(-50%, -50%);
+    transform: scale(1);
+  }
+  display: none;
+  @media (hover: hover) {
+    display: block;
   }
 }

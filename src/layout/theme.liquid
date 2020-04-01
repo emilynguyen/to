@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html class="no-js supports-no-cookies" lang="{{ shop.locale }}">
+<html
+  class="no-js supports-no-cookies {{ template.name }}"
+  lang="{{ shop.locale }}"
+>
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -55,6 +58,12 @@
     {{
       content_for_header
     }}
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body
@@ -88,20 +97,6 @@
 </html>
 
 <script>
-  if (document.getElementById("hamburger").checked) {
-    console.log("checked");
-  } else {
-    console.log("unchecked");
-  }
-</script>
-
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"
-></script>
-
-<script>
   $("html").click(function(e) {
     var targetClasses = e.target.classList;
     // return if hamburger
@@ -122,10 +117,18 @@
     if (menuOpen) {
       $("#hamburger").prop("checked", false);
     }
+
+    // show topbar bg after scroll
+    var $topbar = $("#topbar-container");
+    var scrollPos = $(document).scrollTop();
+    if (scrollPos > 20) {
+      $topbar.addClass("bg");
+    } else {
+      $topbar.removeClass("bg");
+    }
   });
 
   $("#side section").click(function(event) {
-    console.log("side clicked");
     event.stopPropagation();
   });
 </script>
