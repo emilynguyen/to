@@ -1,6 +1,8 @@
 <div
-  id="collection-splash"
-  style="background-image: url('{{ collection.image | img_url: 'master' }}');"
+  id="collection-splash" {% if '/collections/all' == request.path %}class="bg-teal"
+  {% else %} style="background-image: url('{{
+    collection.image | img_url: 'master'
+  }}');"{% endif %}
 >
   <div class="title white">
     <h1>{{ collection.title }}</h1>
@@ -9,6 +11,8 @@
 
 <div id="collection" class="medium-down--pt-3 medium-down--pb-2 pt-4 pb-3">
   <div class="grid">
+    {% paginate collection.products by 20 %} 
+
     {% for product in collection.products %}
     <div
       class="grid__item  medium--one-half large-up--one-third  widescreen--one-quarter small--mb-2 mb-3 {% if product.available %}available{% else %}soldout{% endif %}"
@@ -34,6 +38,10 @@
       </p>
     </div>
     {% endfor %}
+    
+  </div>
+<div class="mb-4">
+  {% if paginate.pages > 1 %} {% include 'pagination' %} {% endif %}  {% endpaginate %} 
   </div>
 </div>
 

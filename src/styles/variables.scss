@@ -28,6 +28,8 @@ $font-body-weight: var(--font-body-weight);
 $font-body-style: var(--font-body-style);
 $font-body-bold-weight: var(--font-body-bold-weight);
 
+$font-body: 1.5rem;
+
 // Transitions
 $transition-duration: 250ms;
 $transition-timing: ease-in-out;
@@ -88,6 +90,7 @@ $breakpoints: (
 ==============================================================================*/
 $breakpoint-has-widths: (
   $small,
+  $medium,
   $medium-up,
   $medium-down,
   $large-up,

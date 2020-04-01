@@ -3,6 +3,9 @@ h3 {
   cursor: text;
 }
 
+#product-images-container {
+  user-select: none;
+}
 .product-options {
   .radio {
     label {
@@ -36,6 +39,8 @@ h3 {
       }
     }
   }
+
+  $radio-gap: 0.4rem;
   .color-radio {
     label {
       @extend .small;
@@ -44,22 +49,33 @@ h3 {
       height: 2.5rem;
       border-radius: 3rem;
       box-sizing: content-box;
-      border: solid 1px rgba(0, 0, 0, 0.3);
+      border: solid 0.1rem rgba(0, 0, 0, 0.2);
       color: rgba(0, 0, 0, 0);
       user-select: none;
+      position: relative;
       &:not(:last-of-type) {
-        margin-right: 0.5rem;
+        margin-right: 1rem;
       }
     }
     input[type="radio"] {
       display: none;
       &:checked + label,
       &:not(:disabled):hover + label {
-        //transform: scale(1.2);
-        border-width: 4px;
+        &:after {
+          content: "";
+          position: absolute;
+          top: calc(-#{$radio-gap} - 0.1rem);
+          left: calc(-#{$radio-gap} - 0.1rem);
+          padding: $radio-gap;
+          height: 100%;
+          width: 100%;
+          box-sizing: content-box;
+          border: 0.1rem solid rgba(0, 0, 0, 1);
+          border-radius: 10rem;
+        }
       }
       &:disabled + label {
-        cursor: default;
+        cursor: not-allowed;
         position: relative;
         &:after {
           content: "✕";
@@ -68,9 +84,9 @@ h3 {
           width: 100%;
           text-align: center;
           line-height: 2.6rem;
-          font-size: 3rem;
+          font-size: 4rem;
           top: 0;
-          left: 0;
+          left: -0.25rem;
           color: rgba(0, 0, 0, 1);
         }
       }
@@ -109,5 +125,29 @@ select::-ms-expand {
   select {
     background: none\9;
     padding: 5px\9;
+  }
+}
+
+#magnify {
+  width: 25rem;
+  height: 25rem;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  border: 1px solid $color-body-text;
+  background-repeat: no-repeat;
+  transition: opacity 0.2s, transform 0.2s;
+  transform: scale(0) translate(-50%, -50%);
+  opacity: 0;
+  // background-size: 100% 100%;
+
+  &.visible {
+    cursor: none;
+    opacity: 1;
+    transform: scale(1) translate(-50%, -50%);
   }
 }

@@ -64,6 +64,13 @@
   max-width: 50vw;
   padding-right: $side-margin;
   padding-left: $side-margin;
+
+  @include media-query(medium-down) {
+    padding-left: $side-margin;
+  }
+  @include media-query(widescreen) {
+    padding-right: calc(#{$side-margin} + #{$spacer-3});
+  }
   h1 {
     max-width: 60%;
     margin-bottom: $side-margin;
@@ -71,8 +78,16 @@
       max-width: 80%;
     }
   }
-  @include media-query(medium-down) {
-    padding-left: $side-margin;
+  h3 {
+    text-align: right;
+
+    a {
+      @include hover {
+        span {
+          // transform: translateX(-$spacer-2);
+        }
+      }
+    }
   }
 }
 

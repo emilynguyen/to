@@ -64,7 +64,7 @@
           {% endif %}
         {% endfor %}
       </ul>
-      <a class="nav-header mb-1" href="">Shop By Product</a>
+      <a class="nav-header mb-1" href="">Shop All</a>
       <a class="nav-header mb-1" href="">Made To Order</a>
       <a class="nav-header" href="">About Us</a>
 
@@ -108,7 +108,7 @@
             {% endif %}
           {% endfor %}
         </ul>
-        <a class="nav-header mb-1 {% if "/products" == request.path %}active{% endif %}" href="">Shop By Product</a>
+        <a class="nav-header mb-1 {% if "/collections/all" == request.path %}active{% endif %}" href="/collections/all">Shop All</a>
         <a class="nav-header mb-1 {% if "/pages/madetoorder" == request.path %}active{% endif %}" href="/pages/madetoorder">Made To Order</a>
         <a class="nav-header {% if "/pages/story" == request.path %}active{% endif %}" href="/pages/story">About Us</a>
 

@@ -1,7 +1,6 @@
 
 <section data-section-id="{{ section.id }}" data-section-type="product">
 
-
   <div id="page" class="product-page">
     <div class="page-content">
      
@@ -45,6 +44,9 @@
               </ul>
               -->
               <div id="product-images-container" class="small--mb-2">
+                <div id="magnify">
+
+                </div>
                 <ul id="product-images">
                   {% for image in product.images %}
                     <li {% if forloop.first == true %}class="active"{% endif %}>
@@ -106,14 +108,22 @@
                  <div class="js">
             <!-- VARIANTS -->
                   {% if option.name == "Size" or option.name == "Color" %}
+                  
+
                    <!-- radio -->
-                   <div class="{% if option.name == "Size" %}radio{% endif %} {% if option.name == "Color" %}color-radio{% endif %}">
+                   <div class="{% if option.name == "Size" %}radio mb-1{% endif %} {% if option.name == "Color" %}color-radio{% endif %}">
                     <h3 class="mb-1">{{ option.name }}</h3>
                     {% for value in option.values %}
                       <input type="radio" id="Option{{ option.position }}-{{ value }}" name="options[{{ option.name }}]" value="{{ value }}"{% if option.selected_value == value %} checked{% endif %}>
                    <label for="Option{{ option.position }}-{{ value }}" {% if option.name == "Color" %}style="background-color: {{value}}"{% endif %}>{{ value }}</label>
                     {% endfor %}
                     </div>
+                    
+                    {% if option.name == "Size" %}
+                      <a href="" class="small">View size chart ↗</a>
+                    
+                    {% endif %}
+             
                   {% else %}
             
           
@@ -243,12 +253,18 @@
   </script>
   
   <script>
+    $(window).on('load', function(){
     var INDEX = 0;
     var $slideContainer = $('#product-images');
     var $slides = $('#product-images li');
+    var $magnify = $('#magnify');
+    var ZOOM = 1.5;
+
     var LENGTH = $slides.length;
     // set counter
     $('#product-images-container .denom').text(LENGTH);
+    // set magnify
+    setMagnify();
   
     function showSlide(i) {
       if (i < 0) {
@@ -259,15 +275,79 @@
       $slides.eq(INDEX).removeClass('active');
       $slides.eq(i).addClass('active');
   
-     INDEX = i;
-     $('#product-images-container .num').text(INDEX + 1);
+      INDEX = i;
+      $('#product-images-container .num').text(INDEX + 1);
   
+      // update magnifying glass
+      setMagnify();
+
     }
     $('.prev').click(function() {
       showSlide(INDEX - 1);
     });
     $('.next').click(function() {
       showSlide(INDEX + 1);
+    });
+
+  
+
+  
+
+    function setMagnify() {
+      var $activeImg = $('#product-images li.active img');
+      var bgWidth = parseInt($activeImg.width()) * ZOOM;
+      var bgHeight = parseInt($activeImg.height()) * ZOOM;
+      $magnify.css({
+        backgroundImage: "url('" + $activeImg.attr('src') +"')",
+        backgroundSize: bgWidth + "px " + bgHeight + "px",
+        
+      });
+    }
+
+
+
+    var inArrowContainer = false;
+
+    $('#product-images-container').hover(function() {
+      $magnify.addClass('visible');
+    }, function() {
+      $magnify.removeClass('visible');
+    });
+    $('.arrow-container').hover(function() {
+      $magnify.removeClass('visible');
+    }, function() {
+      $magnify.addClass('visible');
+    });
+
+    $('#product-images-container').mousemove(function(e) {
+      var bounds = $(this)[0].getBoundingClientRect();
+      var left = e.clientX - bounds.left;
+      var top = e.clientY - bounds.top;
+      var leftPercent = left / bounds.width;
+      var topPercent = top / bounds.height;
+     // console.log(leftPercent +", " +topPercent);
+      var bgX = -bounds.width * ZOOM * leftPercent + 100 + "px";
+      var bgY = -bounds.height * ZOOM * topPercent + 100 +"px";
+      $magnify.css({
+        left: left,
+        top: top,
+        backgroundPosition: bgX + " " + bgY
+        /*
+        backgroundPosition: (-left * ZOOM) + "px " + (-top * ZOOM) +"px" */
+        /*
+        backgroundPosition: (leftPercent) + "% " + (topPercent) + "%" */
+      });
+
+      
+    });
+
+/*
+    $(document).on('mousemove', function(e){
+    $('#your_div_id').css({
+       left:  e.pageX,
+       top:   e.pageY
+    }); */
+
     });
   </script>
   

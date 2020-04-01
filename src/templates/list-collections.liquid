@@ -44,12 +44,13 @@ link.object %} {% unless collection.handle == 'frontpage' %}
         {% endfor %} {% endpaginate %}
       </div>
     </div>
-    <a
-      href="{{ collection.url }}"
-      title="{{ 'collections.general.link_title' | t: title:title }}"
-      style="text-align: right;"
-      ><h3>Shop Now →</h2></a
-    >
+    <h3>
+      <a
+        href="{{ collection.url }}"
+        title="{{ 'collections.general.link_title' | t: title:title }}"
+        ><span>Shop Now</span> →</a
+      >
+    </h3>
   </div>
 </div>
 {% endunless %} {% endfor %}
@@ -60,19 +61,28 @@ link.object %} {% unless collection.handle == 'frontpage' %}
   crossorigin="anonymous"
 ></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.19/jquery.scrollify.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.19/jquery.scrollify.js"></script>
 <script>
-  $("#collection-counter .denom").text($(".collection-container").length);
   $(function() {
     $.scrollify({
-      section: ".collection-container",
-      sectionName: "section-name",
-      scrollSpeed: 1100,
-      before: function() {
-        var i = $($.scrollify.current()).index();
-        $("#collection-counter .num").text(i);
-      }
+      section: ".example-classname"
     });
   });
+</script>
+<script>
+  /*
+  $(document).ready(function() {
+    $("#collection-counter .denom").text($(".collection-container").length);
+    $(function() {
+      $.scrollify({
+        section: ".collection-container",
+        sectionName: "section-name",
+        scrollSpeed: 1100,
+        before: function() {
+          var i = $($.scrollify.current()).index();
+          $("#collection-counter .num").text(i);
+        }
+      });
+    });
+  }); */
 </script>

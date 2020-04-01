@@ -5,32 +5,36 @@ form {
 a,
 area,
 button,
-[role='button'],
+[role="button"],
 input,
 label,
 select,
 summary,
 textarea {
   touch-action: manipulation;
+
+  outline: 0 !important;
 }
 
 input,
 textarea,
 select {
-  font-size: 1.6rem;
+  font-size: $font-body;
   max-width: 100%;
-  border: 1px solid $color-border;
+  border: none;
+
   border-radius: 0;
 
   &[disabled] {
-    border-color: $color-disabled-border;
+    // border-color: $color-disabled-border;
+
     background-color: $color-disabled;
     cursor: default;
   }
 }
 
 button,
-input[type='submit'],
+input[type="submit"],
 label[for] {
   cursor: pointer;
 }

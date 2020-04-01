@@ -55,7 +55,7 @@ body {
   font-weight: $font-body-weight;
   font-style: $font-body-style;
   font-family: "Suisse Int'l";
-  font-size: 1.5rem;
+  font-size: $font-body;
   @include media-query(small) {
     //font-size: 1.2rem;
   }
@@ -192,7 +192,7 @@ select {
 }
 
 a {
-  color: $color-accent;
+  color: inherit;
   text-decoration: none;
 }
 
