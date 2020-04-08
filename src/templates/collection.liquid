@@ -1,6 +1,11 @@
 {% if request.path == '/collections/all' or request.path == '/collections/types'
 %}{% assign all = true %}{% endif %} {% if request.path == '/collections/types'
 %} {% assign filtered = true %} {% endif %}
+{% assign url = canonical_url | remove: shop.url | downcase %}
+
+{% if url == "/collections/types?q=" %}
+{% assign unknown = true %}
+{% endif %}
 <div
   id="collection-splash"
   {%
@@ -20,7 +25,7 @@
 >
   <div class="title white">
     <h1>
-      {% if filtered %}All Collections / {% endif %}{{ collection.title }}
+      {% if filtered %}All Products / {% endif %}{% if unknown %}Unknown Type{% else %}{{ collection.title }}{% endif%}
     </h1>
   </div>
 </div>
@@ -29,11 +34,24 @@
   {% if all %}
   <div class="grid mb-3">
     <div class="grid__item">
-      <ul id="product-type-list" class="small">
-        {% for product_type in shop.types %} {% if product_type == blank %}{%
-        continue %}{% endif %} {% assign typeLink = "/collections/types?q=" |
-        append: product_type | downcase | replace: ' ', '+' %} {% assign url =
-        canonical_url | downcase %}
+     
+      <ul id="product-type-list" class="small large-up--mb-3">
+        <li style="display: block">
+          <a href="/collections/all"  {%
+            if
+            url
+            contains
+            "/collections/all"
+            %}
+            class="active"
+            {%
+            endif
+            %}>All Products</a>
+        </li>
+        {% for product_type in shop.types %} {% assign typeLink =
+        "/collections/types?q=" | append: product_type | downcase | replace: '
+        ', '+' %}  {% if product_type
+        == blank %}{% endif %}
 
         <li data-filter="{{ product_type }}">
           <a
@@ -41,14 +59,15 @@
             {%
             if
             url
-            contains
+            ==
             typeLink
             %}
             class="active"
             {%
             endif
             %}
-            >{{ product_type }}</a
+            >{% if product_type == blank %}Unknown Type{%else%}{{ product_type }}{%
+            endif %}</a
           >
         </li>
         {% endfor %}
@@ -57,7 +76,7 @@
   </div>
   {% endif %}
   <div class="grid">
-    {% paginate collection.products by 20 %} {% for product in
+    {% paginate collection.products by 500 %} {% for product in
     collection.products %}
     <div
       class="grid__item  medium--one-half large-up--one-third  widescreen--one-quarter small--mb-2 mb-3 {% if product.available %}available{% else %}soldout{% endif %}"
@@ -71,6 +90,17 @@
 
         <div class="product-container">
           <img src="{{ product.featured_image | img_url: 'master' }}" alt="" />
+          {% for option in product.options_with_values %}
+            {% if option.name == "Color" %}
+              <div class="swatch-container">
+                {% for value in option.values %}
+                  <div class="swatch" style="background-color: {{value}}">
+
+                  </div>
+                {% endfor%}
+              </div>
+            {% endif %}
+          {% endfor %}
         </div>
       </a>
       {% endif %}
@@ -106,4 +136,14 @@
       $("#collection").css("padding-right", "4vw");
     }
   });
+
+  /*
+  // remove extra active filter if necessary
+  $(document).ready(function() {
+    var $filters = $("#product-type-list a.active");
+    var numActive = $filters.length;
+    if (numActive > 1) {
+      $filters.first().removeClass("active");
+    }
+  }); */
 </script>

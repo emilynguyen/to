@@ -40,54 +40,24 @@ h3 {
     }
   }
 
-  $radio-gap: 0.4rem;
   .color-radio {
     label {
       @extend .small;
-      display: inline-block;
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 3rem;
-      box-sizing: content-box;
-      border: solid 0.1rem rgba(0, 0, 0, 0.2);
-      color: rgba(0, 0, 0, 0);
-      user-select: none;
-      position: relative;
-      &:not(:last-of-type) {
-        margin-right: 1rem;
-      }
+      @extend .swatch-style;
     }
     input[type="radio"] {
       display: none;
       &:checked + label,
       &:not(:disabled):hover + label {
         &:after {
-          content: "";
-          position: absolute;
-          top: calc(-#{$radio-gap} - 0.1rem);
-          left: calc(-#{$radio-gap} - 0.1rem);
-          padding: $radio-gap;
-          height: 100%;
-          width: 100%;
-          box-sizing: content-box;
-          border: 0.1rem solid rgba(0, 0, 0, 1);
-          border-radius: 10rem;
+          @extend .swatch-border-style;
         }
       }
       &:disabled + label {
         cursor: not-allowed;
         position: relative;
         &:after {
-          content: "✕";
-          position: absolute;
-          height: 100%;
-          width: 100%;
-          text-align: center;
-          line-height: 2.6rem;
-          font-size: 4rem;
-          top: 0;
-          left: -0.25rem;
-          color: rgba(0, 0, 0, 1);
+          @extend .swatch-x-style;
         }
       }
     }
