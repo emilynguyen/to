@@ -111,6 +111,14 @@
     }
   });
 
+  // add transition css only after page loads
+  $(document).ready(function() {
+    $("#topbar-container").css(
+      "transition",
+      "background-color 0.5s, color 0.5s, border-color 0.5s, padding 0.5s"
+    );
+  });
+
   // close menu on scroll + resize
   $(window).on("resize scroll", function() {
     var menuOpen = $("#hamburger:checked").length > 0;
