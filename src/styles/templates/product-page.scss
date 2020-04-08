@@ -153,3 +153,8 @@ $magnify-diameter: 25rem;
     display: block;
   }
 }
+
+.size-chart {
+  @extend .small;
+  text-decoration: none;
+}

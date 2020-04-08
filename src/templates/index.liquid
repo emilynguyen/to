@@ -2,62 +2,84 @@
 
 {% assign first_collection = linklists.shop-collections.links.first.object %}
 
-<!-- load default splash image -->
+<!-- invisible div used to load default splash image -->
 <div
   id="default-splash"
-  style="background-image: url(' {% if settings.home_image_default != blank %}{{
-    settings.home_image_default | img_url: 'master'
+  style="background-image: url(' {% if settings.announcement_image != blank %}{{
+    settings.announcement_image | img_url: 'master'
   }}{% else %}{{ first_collection.image | img_url: 'master' }}{% endif %}');"
 ></div>
 
 <!-- actual splash container -->
 {% if settings.home_image_default == blank %}
-  <a href="{{ first_collection.url }}">
+<!--
+  <a href="{{ first_collection.url }}" style="display: block">-->
 {% endif %}
 <div
   id="splash"
-  style="background-image: url(' {% if settings.home_image_default != blank %}{{
-    settings.home_image_default | img_url: 'master'
+  style="background-image: url(' {% if settings.announcement_image != blank %}{{
+    settings.announcement_image | img_url: 'master'
   }}{% else %}{{ first_collection.image | img_url: 'master' }}{% endif %}');"
 >
-  <div class="title-mobile large-up--hide">
+<!-- announcement text  -->
+<div class="title-center announcement-text medium-down--hide {% if settings.announcement_image == blank or settings.announcement_text == blank %}hide{% endif %}">
+  <div>
+    <h3>{% if settings.announcement_url != blank %}<a href="{{settings.announcement_url}}" title="">{% endif %}{{settings.announcement_text}}{% if settings.announcement_url != blank %} →</a>{% endif %}</h2>
+  </div> 
+</div>
+<!-- desktop link to newest collection; hide if announcement image -->
+<div class="title-center shop-newest-link medium-down--hide {% if settings.announcement_image != blank %}hide{% endif %}">
+  <div>
+    <h3><a href="{{first_collection.url}}" title="">Shop {{first_collection.title}} Now →</a></h2>
+  </div> 
+</div>
+<!-- mobile title -->
+  <div class="title-center large-up--hide">
     <div>
       <h1 class="mb-1">{{ shop.name }}</h1>
-      <a href="/collections" title=""><h3>Shop Now →</h2></a>
+      <h3><a href="{% if settings.announcement_url != blank %}{{settings.announcement_url}}{% else %}/collections{% endif%}" title="">{% if settings.announcement_text != blank %}{{settings.announcement_text}}{% else %}Shop Now{% endif%} →</a></h3>
     </div> 
   </div>
 </div>
 {% if settings.home_image_default == blank %}
-  </a>
-{{% endif %}}
+  <!--</a>-->
+{% endif %}
 
-<!-- load collection images-->
+<!-- invisible div used to load collection images-->
 <ul id="home-images">
   {% for link in linklists.shop-collections.links %} {% assign collection =
   link.object %}
-  <li
+  <li {% if forloop.first %}class="first"{% endif %}
     style="background-image: url('{{ collection.image | img_url: 'master' }}');"
   ></li>
   {% endfor %}
 </ul>
 
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"
-></script>
 
 <script>
+  var $newestLink = $('.shop-newest-link');
+  var $announcementText = $('.announcement-text');
+
+
   $("#nav a").mouseover(function() {
+    // hide announcement link
+    $announcementText.hide();
     $(this)
       .closest("li")
       .addClass("active");
     var i = $(this)
       .closest("li")
       .index();
+    // show newest collection link unless hover on diff collection
+    if (i === 0) {
+      $newestLink.show();
+    } else {
+      $newestLink.hide();
+    }
     var newImg = $("#home-images li")
       .eq(i)
       .css("background-image");
+      
     $("#splash").css("background-image", newImg);
   });
 
@@ -65,10 +87,10 @@
   $("#nav").mouseleave(function() {
     var defaultImg = $("#default-splash").css("background-image");
     $("#splash").css("background-image", defaultImg);
+    $newestLink.show();
+    // show announcement link
+    $announcementText.show();
   });
 
-  // link splash
-  $('#splash').click(function() {
 
-  });
 </script>

@@ -13,19 +13,37 @@
       {
         "type": "image_picker",
         "id": "logo",
-        "label": "Logo image",
-        "info": "Triton Outfitters logo"
+        "label": "Color",
+        "info": "Colored logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_white",
+        "label": "White",
+        "info": "White logo"
       }
     ]
   },
   {
-    "name": "Logo — White",
+    "name": "Announcement",
     "settings": [
       {
         "type": "image_picker",
-        "id": "logo_white",
-        "label": "Logo image",
-        "info": "Triton Outfitters logo"
+        "id": "announcement_image",
+        "label": "Background image",
+        "info": "Image to show on the home page"
+      },
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Text",
+        "info": "(Optional)"
+      },
+      {
+        "type": "text",
+        "id": "announcement_url",
+        "label": "Link",
+        "info": "(Optional)"
       }
     ]
   },

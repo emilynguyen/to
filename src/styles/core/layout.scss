@@ -46,12 +46,19 @@ html {
   background-position: center center;
   background-size: cover;
   @include full-height;
-  .title-mobile {
+  .title-center {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     color: #fff;
+  }
+  a {
+    cursor: pointer;
+    transition: opacity 0.3s;
+    @include hover {
+      opacity: 0.5;
+    }
   }
 }
 
@@ -284,7 +291,7 @@ $hamburger-size: 60px;
     }
   }
   @include media-query(small) {
-    top: calc(#{$side-margin} - 0.7rem);
+    top: calc(#{$side-margin} - 1.1rem);
   }
   ul {
     display: inline-block;
@@ -361,7 +368,7 @@ nav {
   }
   a {
     color: inherit;
-    //transition: color 0.3s;
+    transition: color 0.3s;
     @include hover {
       color: $teal;
     }
