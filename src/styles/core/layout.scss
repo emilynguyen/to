@@ -62,52 +62,6 @@ html {
   }
 }
 
-#collection-splash {
-  // background-color: $color-accent;
-  background-position: center center;
-  background-size: cover;
-  //height: 100vh;
-  @include full-height;
-  width: 100vw;
-  position: absolute;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -999;
-  .title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-
-    &.white {
-      color: #fff;
-    }
-  }
-}
-
-#collection {
-  // min-height: 100vh;
-  margin-top: 100vh;
-  top: 0;
-  position: absolute;
-  width: 100vw;
-  left: 0;
-  background-color: white;
-  z-index: 9999;
-
-  padding-left: $side-margin * 2;
-  padding-right: $side-margin * 2;
-
-  @include media-query(large-down) {
-    padding-left: $side-margin;
-    padding-right: $side-margin;
-  }
-  a {
-    text-decoration: none !important;
-  }
-}
-
 #collection,
 .search-page {
   .available {
@@ -368,12 +322,14 @@ nav {
   }
   a {
     color: inherit;
-    transition: color 0.3s;
+    // transition: color 0.3s;
     @include hover {
       color: $teal;
+      opacity: 0.5;
     }
     &.active {
       color: $teal;
+      opacity: 0.5;
     }
   }
 }
@@ -740,4 +696,8 @@ input {
       }
     }
   }
+}
+
+iframe {
+  display: block;
 }

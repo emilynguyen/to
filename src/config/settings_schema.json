@@ -48,6 +48,17 @@
     ]
   },
   {
+    "name": "Teal Texture",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "teal_texture",
+        "label": "Background image",
+        "info": "Background image for Shop All page"
+      }
+    ]
+  },
+  {
     "name": "Colors",
     "settings": [
       {

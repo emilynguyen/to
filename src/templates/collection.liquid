@@ -1,19 +1,64 @@
+{% if request.path == '/collections/all' or request.path == '/collections/types'
+%}{% assign all = true %}{% endif %} {% if request.path == '/collections/types'
+%} {% assign filtered = true %} {% endif %}
 <div
-  id="collection-splash" {% if '/collections/all' == request.path %}class="bg-teal"
-  {% else %} style="background-image: url('{{
-    collection.image | img_url: 'master'
-  }}');"{% endif %}
+  id="collection-splash"
+  {%
+  if
+  all
+  %}class="bg-teal"
+  style="background-image: url({{
+    settings.teal_texture | img_url: 'master'
+  }});"
+  {%
+  else
+  %}
+  style="background-image: url('{{ collection.image | img_url: 'master' }}');"
+  {%
+  endif
+  %}
 >
   <div class="title white">
-    <h1>{{ collection.title }}</h1>
+    <h1>
+      {% if filtered %}All Collections / {% endif %}{{ collection.title }}
+    </h1>
   </div>
 </div>
 
-<div id="collection" class="medium-down--pt-3 medium-down--pb-2 pt-4 pb-3">
-  <div class="grid">
-    {% paginate collection.products by 20 %} 
+<div id="collection" class="medium-down--pt-3 medium-down--pb-2 pt-4 pb-2">
+  {% if all %}
+  <div class="grid mb-3">
+    <div class="grid__item">
+      <ul id="product-type-list" class="small">
+        {% for product_type in shop.types %} {% if product_type == blank %}{%
+        continue %}{% endif %} {% assign typeLink = "/collections/types?q=" |
+        append: product_type | downcase | replace: ' ', '+' %} {% assign url =
+        canonical_url | downcase %}
 
-    {% for product in collection.products %}
+        <li data-filter="{{ product_type }}">
+          <a
+            href="{{ typeLink }}"
+            {%
+            if
+            url
+            contains
+            typeLink
+            %}
+            class="active"
+            {%
+            endif
+            %}
+            >{{ product_type }}</a
+          >
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+  <div class="grid">
+    {% paginate collection.products by 20 %} {% for product in
+    collection.products %}
     <div
       class="grid__item  medium--one-half large-up--one-third  widescreen--one-quarter small--mb-2 mb-3 {% if product.available %}available{% else %}soldout{% endif %}"
     >
@@ -38,14 +83,12 @@
       </p>
     </div>
     {% endfor %}
-    
   </div>
-<div class="mb-4">
-  {% if paginate.pages > 1 %} {% include 'pagination' %} {% endif %}  {% endpaginate %} 
+  <div class="mb-4">
+    {% if paginate.pages > 1 %} {% include 'pagination' %} {% endif %} {%
+    endpaginate %}
   </div>
 </div>
-
-
 
 <script>
   // Set padding-right on collection to = sidebar
