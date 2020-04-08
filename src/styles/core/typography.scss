@@ -168,8 +168,11 @@ b {
   text-transform: uppercase;
 }
 
+.defaultcase {
+  text-transform: none !important;
+}
+
 .header {
-  //@extend p;
   @extend .small;
 }
 

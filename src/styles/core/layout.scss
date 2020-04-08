@@ -352,11 +352,11 @@ $hamburger-size: 60px;
     li a,
     .nav-header {
       @include hover {
-        opacity: 0.6;
+        opacity: 0.5;
       }
     }
     .active {
-      opacity: 0.6;
+      opacity: 0.5;
     }
   }
 }
@@ -416,7 +416,7 @@ nav {
 }
 
 .nav-header {
-  text-transform: uppercase;
+  // text-transform: uppercase;
   font-weight: 600;
   display: block;
   white-space: nowrap;
@@ -424,7 +424,11 @@ nav {
 
 #sideways-title {
   img {
+    padding-top: $side-margin;
     width: 13rem;
+  }
+  @media only screen and (max-height: 800px) {
+    // display: none;
   }
 }
 

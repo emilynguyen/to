@@ -1,0 +1,62 @@
+{% assign menu = linklists.sidebar-menu %} {% for link in menu.links %}
+<a
+  class="nav-header {% if link.active %}active{% endif %} {% if link.links == blank %}mb-1{% endif %}"
+  href="{{ link.url }}"
+  >{{ link.title }}</a
+>
+
+{% if link.links != blank %}
+<ul {% if link.url == "/collections" and realNav == true %}id="collection-list"{% endif %} class="mb-1">
+  {% for child_link in link.links %}
+  <li class="defaultcase">
+    <a
+      href="{{ child_link.url }}"
+      {%
+      if
+      child_link.active
+      %}class="active"
+      {%
+      endif
+      %}
+    >
+      {{ child_link.title }}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %} {% endfor %}
+
+<!--
+<a class="nav-header {% if "/collections" == request.path %}active{% endif %}" href="/collections">Shop By Collection</a>
+<ul id="nav" class="mb-1">
+  {% for link in linklists[section.settings.menu].links %}
+    {% if link.links != blank %}
+      <li>
+        <a href="{{ link.url }}">
+          {{ link.title }}
+          {% include 'icon-arrow-down' %}
+        </a>
+        <ul>
+          {% for childlink in link.links %}
+            <li>
+              <a href="{{ childlink.url }}">
+                {{ childlink.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% else %}
+      <li>
+        <a href="{{ link.url }}" {% if link.url == request.path %}class="active"{% endif %}>
+          {{ link.title }}
+        </a>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+<a class="nav-header mb-1 {% if "/collections/all" == request.path %}active{% endif %}" href="/collections/all">Shop All</a>
+<a class="nav-header mb-1 {% if "/pages/madetoorder" == request.path %}active{% endif %}" href="/pages/madetoorder">Made To Order</a>
+<a class="nav-header {% if "/pages/story" == request.path %}active{% endif %}" href="/pages/story">About Us</a>
+
+-->

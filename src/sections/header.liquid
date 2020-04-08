@@ -35,41 +35,10 @@
     {% endif %}
 
     <nav role="navigation">
-     
-      <a class="nav-header" href="">Shop By Collection</a>
-      <ul class="mb-1">
-        {% for link in linklists[section.settings.menu].links %}
-          {% if link.links != blank %}
-            <li>
-              <a href="{{ link.url }}">
-                {{ link.title }}
-                {% include 'icon-arrow-down' %}
-              </a>
-              <ul>
-                {% for childlink in link.links %}
-                  <li>
-                    <a href="{{ childlink.url }}">
-                      {{ childlink.title }}
-                    </a>
-                  </li>
-                {% endfor %}
-              </ul>
-            </li>
-          {% else %}
-            <li>
-              <a href="{{ link.url }}">
-                {{ link.title }}
-              </a>
-            </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-      <a class="nav-header mb-1" href="">Shop All</a>
-      <a class="nav-header mb-1" href="">Made To Order</a>
-      <a class="nav-header" href="">About Us</a>
-
+      {% include 'sidebar-nav' %}
     </nav>
-    </div>
+
+  </div>
 <!-- END OF PLACEHOLDER -->
 
 <div class="sidebar">
@@ -81,39 +50,10 @@
       {% endif %}
 
       <nav role="navigation">
+      {% assign realNav = true %}
       
-        <a class="nav-header {% if "/collections" == request.path %}active{% endif %}" href="/collections">Shop By Collection</a>
-        <ul id="nav" class="mb-1">
-          {% for link in linklists[section.settings.menu].links %}
-            {% if link.links != blank %}
-              <li>
-                <a href="{{ link.url }}">
-                  {{ link.title }}
-                  {% include 'icon-arrow-down' %}
-                </a>
-                <ul>
-                  {% for childlink in link.links %}
-                    <li>
-                      <a href="{{ childlink.url }}">
-                        {{ childlink.title }}
-                      </a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              </li>
-            {% else %}
-              <li>
-                <a href="{{ link.url }}" {% if link.url == request.path %}class="active"{% endif %}>
-                  {{ link.title }}
-                </a>
-              </li>
-            {% endif %}
-          {% endfor %}
-        </ul>
-        <a class="nav-header mb-1 {% if "/collections/all" == request.path %}active{% endif %}" href="/collections/all">Shop All</a>
-        <a class="nav-header mb-1 {% if "/pages/madetoorder" == request.path %}active{% endif %}" href="/pages/madetoorder">Made To Order</a>
-        <a class="nav-header {% if "/pages/story" == request.path %}active{% endif %}" href="/pages/story">About Us</a>
-
+      {% include 'sidebar-nav' %}
+       
         <!-- top nav -->
         <div class="mobile-top-nav large-up--hide">
             {% if shop.customer_accounts_enabled %}

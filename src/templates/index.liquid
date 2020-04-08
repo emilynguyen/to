@@ -61,7 +61,8 @@
   var $announcementText = $('.announcement-text');
 
 
-  $("#nav a").mouseover(function() {
+  $("#collection-list a").mouseover(function() {
+    console.log("mouseover");
     // hide announcement link
     $announcementText.hide();
     $(this)
@@ -83,8 +84,9 @@
     $("#splash").css("background-image", newImg);
   });
 
-  // switch to default img if #nav is left
-  $("#nav").mouseleave(function() {
+  // switch to default img if #collection-list is left
+  $("#collection-list").mouseout(function() {
+    console.log("mouseleave");
     var defaultImg = $("#default-splash").css("background-image");
     $("#splash").css("background-image", defaultImg);
     $newestLink.show();
