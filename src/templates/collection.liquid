@@ -76,7 +76,7 @@
   </div>
   {% endif %}
   <div class="grid">
-    {% paginate collection.products by 500 %} {% for product in
+    {% paginate collection.products by 20 %} {% for product in
     collection.products %}
     <div
       class="grid__item  medium--one-half large-up--one-third  widescreen--one-quarter small--mb-2 mb-3 {% if product.available %}available{% else %}soldout{% endif %}"
@@ -114,10 +114,12 @@
     </div>
     {% endfor %}
   </div>
-  <div class="mb-4">
-    {% if paginate.pages > 1 %} {% include 'pagination' %} {% endif %} {%
-    endpaginate %}
+  {% if paginate.pages > 1 %}
+  <div class="mb-2 medium-up--mb-3">
+     {% include 'pagination' %} 
   </div>
+  {% endif %} {%
+    endpaginate %}
 </div>
 
 <script>

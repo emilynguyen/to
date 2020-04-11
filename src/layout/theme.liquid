@@ -87,7 +87,10 @@
           "general.accessibility.skip_to_content" | t
         }}</a>
         <main role="main" id="MainContent">
+          {% if request.path == '/challenge' %} {% include 'challenge' %} {%
+          else %}
           {{ content_for_layout }}
+          {% endif %}
         </main>
         <!--
       {% section 'footer' %} -->

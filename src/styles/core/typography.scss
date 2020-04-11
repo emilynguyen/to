@@ -151,6 +151,7 @@ h2 {
 
 h3 {
   font-size: 1.9rem;
+  line-height: 140%;
   font-weight: bold;
 }
 
@@ -161,7 +162,14 @@ p {
 b {
   font-weight: 600;
 }
-
+.paragraph {
+  h1,
+  h2,
+  h3,
+  p:not(:last-child) {
+    margin-bottom: $spacer-2;
+  }
+}
 .small {
   font-size: 80%;
   line-height: 160%;

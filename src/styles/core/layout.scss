@@ -403,22 +403,21 @@ nav {
 
   &:not(.product-page),
   &:not(.cart-page) {
-    h1,
-    h2,
-    h3,
-    p:not(:last-child) {
-      @extend .mb-2;
-    }
+    @extend .paragraph;
   }
   @include media-query(medium-down) {
     padding-left: $side-margin;
     padding-right: $side-margin;
     padding-bottom: $side-margin;
   }
+
   .page-content {
     width: 100%;
     @include media-query(large) {
       padding-right: $side-margin * 2;
+    }
+    @include media-query(small) {
+      margin-bottom: $spacer-3;
     }
   }
   .page-spacer {
@@ -637,6 +636,19 @@ nav {
   }
 }
 
+.input {
+  @extend .small;
+  border-bottom: 1px solid #000;
+  display: inline-block;
+  &::placeholder {
+    opacity: 0.7;
+  }
+  &:not(.button) {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
 #page.login-page {
   .page-content {
     display: flex;
@@ -652,16 +664,7 @@ nav {
     width: 100%;
     max-width: 30rem;
     input {
-      @extend .small;
-      border-bottom: 1px solid #000;
-      display: inline-block;
-      &::placeholder {
-        opacity: 0.7;
-      }
-      &:not(.button) {
-        width: 100%;
-        padding: 1rem;
-      }
+      @extend .input;
     }
   }
 }
@@ -676,6 +679,8 @@ input {
 }
 
 .pagination {
+  text-align: center;
+  padding: 0 $side-margin;
   .active {
     //font-weight: bold;
     // color: $teal;
@@ -750,4 +755,60 @@ $swatch-border-gap: 0.4rem;
   top: 0;
   left: -0.25rem;
   color: rgba(0, 0, 0, 1);
+}
+
+body.template-password {
+  overflow: scroll;
+  text-align: center;
+  background-color: $teal;
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include media-query(medium-down) {
+    background-image: none !important;
+    background-color: white;
+    display: block;
+  }
+  #main {
+    background-color: white;
+    max-width: 800px;
+    padding: $side-margin;
+    margin: $side-margin;
+    @include media-query(medium-down) {
+      padding-top: $spacer-3;
+      padding-bottom: $spacer-3;
+    }
+    @include media-query(small) {
+      //  margin-top: $spacer-2;
+      //  margin-bottom: $spacer-2;
+    }
+  }
+  input {
+    @extend .input;
+    max-width: 25rem; // same as login container
+    @include media-query(small) {
+      max-width: auto;
+      width: 100%;
+    }
+  }
+  .button {
+    display: inline-block;
+    margin-left: $spacer-1;
+    @include media-query(small) {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: $spacer-1;
+    }
+  }
+}
+
+.challenge-page {
+  .shopify-challenge__button {
+    @extend .button;
+    display: block !important;
+    margin-top: $spacer-2;
+  }
 }
