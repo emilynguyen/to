@@ -83,20 +83,21 @@ h1 {
   @include media-query(medium-down) {
     font-size: 12vw;
   }
-}
-
-#collection-splash {
-  h1 {
-    padding-left: $side-margin;
-    padding-right: $side-margin;
+  @include media-query(small) {
+    font-size: 8rem;
   }
 }
 
 #splash,
 #collection-splash {
   text-align: center;
+  h1 {
+    padding-left: $side-margin;
+    padding-right: $side-margin;
+  }
 }
 
+/*
 #splash,
 #collection-splash,
 #page {
@@ -106,13 +107,15 @@ h1 {
     }
   }
 }
+
 #page.product-page {
   h1 {
     @include media-query(medium-down) {
-      font-size: 9vw;
+      //font-size: 9vw;
     }
   }
 }
+*/
 
 /*
 #splash {

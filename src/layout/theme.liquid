@@ -131,11 +131,14 @@
 
     // show topbar bg after scroll
     var $topbar = $("#topbar-container");
+    var $sidebar = $(".sidebar");
     var scrollPos = $(document).scrollTop();
     if (scrollPos > 20) {
       $topbar.addClass("bg");
+      $sidebar.addClass("slide-up");
     } else {
       $topbar.removeClass("bg");
+      $sidebar.removeClass("slide-up");
     }
   });
 

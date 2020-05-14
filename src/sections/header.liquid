@@ -41,7 +41,7 @@
   </div>
 <!-- END OF PLACEHOLDER -->
 
-<div class="sidebar">
+<div class="sidebar {{template.name}}">
   <div>
       {% if settings.logo != blank %}
         <a href="/"><img class="logo medium-down--hide" src="{% if template.name == 'collection' %}{{ settings.logo_white | img_url }}{% else %}{{ settings.logo | img_url }}{% endif %}" alt="Triton Outfitters">

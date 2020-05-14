@@ -1,6 +1,6 @@
 {{ content_for_index }}
 
-{% assign first_collection = linklists.shop-collections.links.first.object %}
+{% assign first_collection = linklists.sidebar-menu.links.first.links.first.object %}
 
 <!-- invisible div used to load default splash image -->
 <div
@@ -47,7 +47,7 @@
 
 <!-- invisible div used to load collection images-->
 <ul id="home-images">
-  {% for link in linklists.shop-collections.links %} {% assign collection =
+  {% for link in linklists.sidebar-menu.links.first.links %} {% assign collection =
   link.object %}
   <li {% if forloop.first %}class="first"{% endif %}
     style="background-image: url('{{ collection.image | img_url: 'master' }}');"

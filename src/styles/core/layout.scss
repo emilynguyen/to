@@ -63,39 +63,6 @@ html {
   }
 }
 
-#collection,
-.search-page {
-  .available {
-    img {
-      transition: transform 0.4s;
-      @include hover {
-        transform: scale(1.05);
-      }
-    }
-  }
-  .soldout {
-    text-decoration: line-through;
-    opacity: 0.3;
-  }
-}
-
-.product-container {
-  overflow: hidden;
-  width: 100%;
-  height: 0;
-  padding-top: 150%;
-  position: relative;
-  background-color: $light-gray;
-  img {
-    top: 0;
-    position: absolute;
-    width: 100%;
-  }
-  p a {
-    text-decoration: none !important;
-  }
-}
-
 body,
 html {
   height: 100%;
@@ -185,6 +152,12 @@ $hamburger-size: 60px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: transform 0.8s;
+    &:not(.list-collections).slide-up {
+      @include media-query(large-up) {
+        transform: translateY(calc(#{-$side-margin} + 2rem));
+      }
+    }
   }
   .search-input {
     width: calc(100% - #{$side-margin});

@@ -1,8 +1,8 @@
 <!--
 This page represents the /collections and /products pages.
 -->
-{% for link in linklists.shop-collections.links %} {% assign collection =
-link.object %} {% unless collection.handle == 'frontpage' %}
+{% for link in linklists.sidebar-menu.links.first.links %} {% assign collection
+= link.object %} {% unless collection.handle == 'frontpage' %}
 <div class="collection-container" data-section-name="{{ collection.title }}">
   <a
     class="collection-banner"

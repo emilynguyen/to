@@ -74,6 +74,7 @@
           </div>
           <div class="grid__item medium-up--one-half">
             <h1 class="mb-1">{{ product.title }}</h1>
+
            <!-- <p>{{ product.vendor }}</p> -->
            <!-- PRICE -->
            <h3 class="mb-2 price">
@@ -94,7 +95,6 @@
            </h3>
            <div class="mb-2">
             <p>{{ product.description }}</p>
-
            </div>
            
           
@@ -208,20 +208,80 @@
           </div>
         </div>
   
-        <!-- related products 
-        <div class="grid">
-          <div class="grid__item one-third">
-            <h1>Related Products</h1>
-          </div>
-          <div class="grid__item two-thirds">
-              
-  
-              {% for collection in product.collections %}
-              {{ collection.title }}
-          {% endfor %}
-  
-          </div>
-        </div> -->
+        <!-- array of menu item titles -->
+        {% assign menu_collections = linklists.sidebar-menu.links.first.links | map: 'title' %}
+
+        {% for collection in product.collections %}
+          {% if menu_collections contains collection.title %}
+              <!-- only show related products if product belongs to a collection on menu -->
+
+
+<!---------------------RELATED PRODUCTS ------------------------>
+
+              <div class="grid pt-4">
+                <div class="grid__item large-up--one-quarter">
+                  <h2>Shop More from <a class="link" href={{ collection.url }}>{{collection.title}}</a></h2>
+                </div>
+                    
+                      <!-- get 3 related products -->
+                      {% assign relatedProductCount = 0 %}
+                      {% for relatedProduct in collection.products %}
+                        <!-- skip current product -->
+                        {% if relatedProduct.title == product.title %}
+                          {% continue %}
+                        {% endif %}
+
+                <div
+                  class="grid__item product-card medium-up--one-third large-up--one-quarter small--mb-2 mb-3 {% if relatedProduct.available %}available{% else %}soldout{% endif %}"
+                >
+                        {% if relatedProduct.featured_image != blank %}
+                        <a href="{{ relatedProduct.url | within: collection }}">
+                          <!--
+                          {% include 'responsive-image' with image: product.featured_image,
+                          max_width: 1400, max_height: 1600 %}
+                  -->
+                  
+                          <div class="product-container">
+                            <img src="{{ relatedProduct.featured_image | img_url: 'master' }}" alt="" />
+                            {% for option in relatedProduct.options_with_values %}
+                              {% if option.name == "Color" %}
+                                <div class="swatch-container">
+                                  {% for value in option.values %}
+                                    <div class="swatch" style="background-color: {{value}}">
+                  
+                                    </div>
+                                  {% endfor%}
+                                </div>
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+                        </a>
+                        {% endif %}
+                  
+                        <p class="mt-1">
+                          <a href="{{ relatedProduct.url | within: collection }}">{{ relatedProduct.title }}</a>
+                        </p>
+                        <p>
+                          <b>{{ relatedProduct.price | money }}</b>
+                        </p>
+                      </div>
+                        
+                        <!-- stop if 3 related products found -->
+                        {% assign relatedProductCount = relatedProductCount | plus: 1 %}
+                        {% if relatedProductCount == 3 %}
+                          {% break %}
+                        {% endif %}
+                        
+                      {% endfor %} <!-- /for relatedProduct in collection.products -->
+        
+              </div> <!-- /.grid -->
+
+
+
+          {% endif %}
+        {% endfor %} <!-- /for collection in product.collections -->
+
+
       
       
       

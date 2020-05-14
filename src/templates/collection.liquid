@@ -1,3 +1,9 @@
+<style>
+  .bg-teal {
+    background-image: url({{settings.teal_texture | img_url: 'master'}});
+  }
+</style>
+
 {% if request.path == '/collections/all' or request.path == '/collections/types'
 %}{% assign all = true %}{% endif %} {% if request.path == '/collections/types'
 %} {% assign filtered = true %} {% endif %}
@@ -8,17 +14,10 @@
 {% endif %}
 <div
   id="collection-splash"
-  {%
-  if
-  all
-  %}class="bg-teal"
-  style="background-image: url({{
-    settings.teal_texture | img_url: 'master'
-  }});"
-  {%
-  else
-  %}
+  {% if collection.image %}
   style="background-image: url('{{ collection.image | img_url: 'master' }}');"
+  {% else %}
+  class="bg-teal"
   {%
   endif
   %}
@@ -79,7 +78,7 @@
     {% paginate collection.products by 20 %} {% for product in
     collection.products %}
     <div
-      class="grid__item  medium--one-half large-up--one-third  widescreen--one-quarter small--mb-2 mb-3 {% if product.available %}available{% else %}soldout{% endif %}"
+      class="grid__item product-card medium--one-half large-up--one-third  widescreen--one-quarter small--mb-2 mb-3 {% if product.available %}available{% else %}soldout{% endif %}"
     >
       {% if product.featured_image != blank %}
       <a href="{{ product.url | within: collection }}">

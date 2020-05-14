@@ -44,7 +44,7 @@
     <div class="grid">
       {% for item in search.results %}
       <div
-        class="grid__item medium--one-half large-up--one-third small--mb-2 mb-3 {% if item.object_type == 'product' and item.available %}available{% elsif item.object_type == 'product' and !item.available %}
+        class="grid__item product-card medium--one-half large-up--one-third small--mb-2 mb-3 {% if item.object_type == 'product' and item.available %}available{% elsif item.object_type == 'product' and !item.available %}
            %}soldout{% endif %}"
       >
         <a href="{{ item.url | within: collection }}">
