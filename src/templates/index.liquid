@@ -11,10 +11,7 @@
 ></div>
 
 <!-- actual splash container -->
-{% if settings.home_image_default == blank %}
-<!--
-  <a href="{{ first_collection.url }}" style="display: block">-->
-{% endif %}
+
 <div
   id="splash"
   style="background-image: url(' {% if settings.customHomepage_image != blank %}{{
@@ -22,13 +19,13 @@
   }}{% else %}{{ first_collection.image | img_url: 'master' }}{% endif %}');"
 >
 <!-- announcement text  -->
-<div class="title-center announcement-text medium-down--hide {% if settings.customHomepage_image == blank or settings.customHomepage_text == blank %}hide{% endif %}">
+<div class="title-center announcement-text medium-down--hide {% if settings.customHomepage_text == blank %}hide{% endif %}">
   <div>
     <h3>{% if settings.customHomepage_url != blank %}<a href="{{settings.customHomepage_url}}" title="">{% endif %}{{settings.customHomepage_text}}{% if settings.customHomepage_url != blank %} →</a>{% endif %}</h2>
   </div> 
 </div>
-<!-- desktop link to newest collection; hide if announcement image -->
-<div class="title-center shop-newest-link medium-down--hide {% if settings.customHomepage_image != blank %}hide{% endif %}">
+<!-- desktop link to newest collection; hide if announcement image or text -->
+<div class="title-center shop-newest-link medium-down--hide {% if settings.customHomepage_image != blank or settings.customHomepage_text != blank %}hide{% endif %}">
   <div>
     <h3><a href="{{first_collection.url}}" title="">Shop {{first_collection.title}} Now →</a></h2>
   </div> 
@@ -41,9 +38,7 @@
     </div> 
   </div>
 </div>
-{% if settings.home_image_default == blank %}
-  <!--</a>-->
-{% endif %}
+
 
 <!-- invisible div used to load collection images-->
 <ul id="home-images">

@@ -75,7 +75,7 @@
          <!-- PRICE -->
          <h3 class="mb-2 price">
           <div data-price-wrapper>
-            <span data-product-price {% if !product.available or !current_variant.available %}class="unavailable"{% endif %}>
+            <span data-product-price {% if product.available == false or current_variant.available == false %}class="unavailable"{% endif %}>
               {{ current_variant.price | money }}
             </span>
       
@@ -172,7 +172,7 @@
             
             <!-- SUBMIT -->
             <div>
-              <button class="button {% if !product.available or !current_variant.available %}unavailable{% endif %}"
+              <button class="button {% if product.available == false or current_variant.available == false %}unavailable{% endif %}"
                 type="submit"
                 name="add"
                 data-submit-button

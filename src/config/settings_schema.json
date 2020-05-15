@@ -43,7 +43,7 @@
         "type": "text",
         "id": "customHomepage_url",
         "label": "Link",
-        "info": "(Optional)"
+        "info": "(Optional; Must enter link text above)"
       }
     ]
   },
