@@ -25,23 +25,23 @@
     ]
   },
   {
-    "name": "Announcement",
+    "name": "Custom Homepage",
     "settings": [
       {
         "type": "image_picker",
-        "id": "announcement_image",
+        "id": "customHomepage_image",
         "label": "Background image",
         "info": "Image to show on the home page"
       },
       {
         "type": "text",
-        "id": "announcement_text",
+        "id": "customHomepage_text",
         "label": "Text",
         "info": "(Optional)"
       },
       {
         "type": "text",
-        "id": "announcement_url",
+        "id": "customHomepage_url",
         "label": "Link",
         "info": "(Optional)"
       }

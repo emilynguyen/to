@@ -5,8 +5,8 @@
 <!-- invisible div used to load default splash image -->
 <div
   id="default-splash"
-  style="background-image: url(' {% if settings.announcement_image != blank %}{{
-    settings.announcement_image | img_url: 'master'
+  style="background-image: url(' {% if settings.customHomepage_image != blank %}{{
+    settings.customHomepage_image | img_url: 'master'
   }}{% else %}{{ first_collection.image | img_url: 'master' }}{% endif %}');"
 ></div>
 
@@ -17,18 +17,18 @@
 {% endif %}
 <div
   id="splash"
-  style="background-image: url(' {% if settings.announcement_image != blank %}{{
-    settings.announcement_image | img_url: 'master'
+  style="background-image: url(' {% if settings.customHomepage_image != blank %}{{
+    settings.customHomepage_image | img_url: 'master'
   }}{% else %}{{ first_collection.image | img_url: 'master' }}{% endif %}');"
 >
 <!-- announcement text  -->
-<div class="title-center announcement-text medium-down--hide {% if settings.announcement_image == blank or settings.announcement_text == blank %}hide{% endif %}">
+<div class="title-center announcement-text medium-down--hide {% if settings.customHomepage_image == blank or settings.customhomepage_text == blank %}hide{% endif %}">
   <div>
-    <h3>{% if settings.announcement_url != blank %}<a href="{{settings.announcement_url}}" title="">{% endif %}{{settings.announcement_text}}{% if settings.announcement_url != blank %} →</a>{% endif %}</h2>
+    <h3>{% if settings.customhomepage_url != blank %}<a href="{{settings.customhomepage_url}}" title="">{% endif %}{{settings.customhomepage_text}}{% if settings.customhomepage_url != blank %} →</a>{% endif %}</h2>
   </div> 
 </div>
 <!-- desktop link to newest collection; hide if announcement image -->
-<div class="title-center shop-newest-link medium-down--hide {% if settings.announcement_image != blank %}hide{% endif %}">
+<div class="title-center shop-newest-link medium-down--hide {% if settings.customHomepage_image != blank %}hide{% endif %}">
   <div>
     <h3><a href="{{first_collection.url}}" title="">Shop {{first_collection.title}} Now →</a></h2>
   </div> 
@@ -37,7 +37,7 @@
   <div class="title-center large-up--hide">
     <div>
       <h1 class="mb-1">{{ shop.name }}</h1>
-      <h3><a href="{% if settings.announcement_url != blank %}{{settings.announcement_url}}{% else %}/collections{% endif%}" title="">{% if settings.announcement_text != blank %}{{settings.announcement_text}}{% else %}Shop Now{% endif%} →</a></h3>
+      <h3><a href="{% if settings.customhomepage_url != blank %}{{settings.customhomepage_url}}{% else %}/collections{% endif%}" title="">{% if settings.customhomepage_text != blank %}{{settings.customhomepage_text}}{% else %}Shop Now{% endif%} →</a></h3>
     </div> 
   </div>
 </div>
