@@ -22,9 +22,9 @@
   }}{% else %}{{ first_collection.image | img_url: 'master' }}{% endif %}');"
 >
 <!-- announcement text  -->
-<div class="title-center announcement-text medium-down--hide {% if settings.customHomepage_image == blank or settings.customhomepage_text == blank %}hide{% endif %}">
+<div class="title-center announcement-text medium-down--hide {% if settings.customHomepage_image == blank or settings.customHomepage_text == blank %}hide{% endif %}">
   <div>
-    <h3>{% if settings.customhomepage_url != blank %}<a href="{{settings.customhomepage_url}}" title="">{% endif %}{{settings.customhomepage_text}}{% if settings.customhomepage_url != blank %} →</a>{% endif %}</h2>
+    <h3>{% if settings.customHomepage_url != blank %}<a href="{{settings.customHomepage_url}}" title="">{% endif %}{{settings.customHomepage_text}}{% if settings.customHomepage_url != blank %} →</a>{% endif %}</h2>
   </div> 
 </div>
 <!-- desktop link to newest collection; hide if announcement image -->
@@ -37,7 +37,7 @@
   <div class="title-center large-up--hide">
     <div>
       <h1 class="mb-1">{{ shop.name }}</h1>
-      <h3><a href="{% if settings.customhomepage_url != blank %}{{settings.customhomepage_url}}{% else %}/collections{% endif%}" title="">{% if settings.customhomepage_text != blank %}{{settings.customhomepage_text}}{% else %}Shop Now{% endif%} →</a></h3>
+      <h3><a href="{% if settings.customHomepage_url != blank %}{{settings.customHomepage_url}}{% else %}/collections{% endif%}" title="">{% if settings.customHomepage_text != blank %}{{settings.customHomepage_text}}{% else %}Shop Now{% endif%} →</a></h3>
     </div> 
   </div>
 </div>
