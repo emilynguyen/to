@@ -1,64 +1,120 @@
 <!--
 This page represents the /collections and /products pages.
 -->
-{% for link in linklists.sidebar-menu.links.first.links %} {% assign collection
-= link.object %} {% unless collection.handle == 'frontpage' %}
-<div class="collection-container" data-section-name="{{ collection.title }}">
-  <a
-    class="collection-banner"
-    style="background-image: url({{ collection.image | img_url: 'master' }})"
-    href="{{ collection.url }}"
-    title="{{ 'collections.general.link_title' | t: title:title }}"
-  >
-    {% if collection.image != blank or collection.products.first != blank %} {%-
-    assign image_object = collection.image | default:
-    collection.products.first.featured_image -%} {% else %} {% capture current
-    %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-    {{
-      "collection-"
-        | append: current
-        | placeholder_svg_tag: "placeholder-svg placeholder-svg--small"
-    }}
-    {% endif %}
-    <div class="title-mobile large-up--hide">
-      <h1>{{ collection.title }}</h1>
+
+<!-- MOBILE -->
+
+<div class="large-up--hide">
+  <div id="page">
+    <div class="page-content">
+      <h1>Collections</h1>
+      {% for link in linklists.sidebar-menu.links.first.links %} {% assign
+      collection = link.object %} {% unless collection.handle == 'frontpage' %}
+      <div class="mobile-collection-container">
+        <hr />
+        <div class="grid">
+          <div class="grid__item one-half">
+            <div class="collection-preview">
+              <a
+                href="{{ collection.url }}"
+                title="{{ 'collections.general.link_title' | t: title:title }}"
+              >
+                <img src="{{ collection.image | img_url: 'master' }}" alt="" />
+              </a>
+            </div>
+          </div>
+          <div class="grid__item one-half">
+            <div class="text">
+              <h2 class="mb-1">{{ collection.title }}</h2>
+              <h3>
+                <a
+                  href="{{ collection.url }}"
+                  title="{{
+                    'collections.general.link_title' | t: title:title
+                  }}"
+                  ><span>Shop Now</span> →</a
+                >
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% endunless %} {% endfor %}
     </div>
-  </a>
-  <div class="collection-info medium-down--hide">
-    <!--
+    <div class="page-spacer"></div>
+  </div>
+
+  <script>
+    // Set padding-right = sidebar
+    $(window).on("load resize", function() {
+      var sidebarWidth = $("#side").innerWidth();
+      $(".page-spacer").css("width", sidebarWidth);
+    });
+  </script>
+</div>
+
+<!-- DESKTOP -->
+<div class="medium-down--hide">
+  {% for link in linklists.sidebar-menu.links.first.links %} {% assign
+  collection = link.object %} {% unless collection.handle == 'frontpage' %}
+  <div class="collection-container" data-section-name="{{ collection.title }}">
+    <a
+      class="collection-banner"
+      style="background-image: url({{ collection.image | img_url: 'master' }})"
+      href="{{ collection.url }}"
+      title="{{ 'collections.general.link_title' | t: title:title }}"
+    >
+      {% if collection.image != blank or collection.products.first != blank %}
+      {%- assign image_object = collection.image | default:
+      collection.products.first.featured_image -%} {% else %} {% capture current
+      %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+      {{
+        "collection-"
+          | append: current
+          | placeholder_svg_tag: "placeholder-svg placeholder-svg--small"
+      }}
+      {% endif %}
+      <div class="title-mobile large-up--hide">
+        <h1>{{ collection.title }}</h1>
+      </div>
+    </a>
+    <div class="collection-info">
+      <!--
     <div id="collection-counter" class="large-down--hide">
       <span class="num">1</span>/<span class="denom">0</span>
     </div>
     -->
-    <div id="collection-counter" class="mb-2">
-      <span>{{ forloop.index }}</span
-      >/<span>{{ forloop.length }}</span>
-    </div>
-    <h1>{{ collection.title }}</h1>
-    <div class="collection-preview">
-      <div class="grid">
-        {% paginate collection.products by 3 %} {% for product in
-        collection.products %}
-        <div class="grid__item one-third">
-          <a href="{{ product.url }}" title="{{ product.title }}"
-            ><img src="{{ product | img_url: "master" }}" alt="{{
-              product.title
-            }}"></a
-          >
-        </div>
-        {% endfor %} {% endpaginate %}
+      <div id="collection-counter" class="mb-2">
+        <span>{{ forloop.index }}</span
+        >/<span>{{ forloop.length }}</span>
       </div>
+      <h1>{{ collection.title }}</h1>
+      <div class="collection-preview">
+        <div class="grid">
+          {% paginate collection.products by 3 %} {% for product in
+          collection.products %}
+          <div class="grid__item one-third">
+            <a href="{{ product.url }}" title="{{ product.title }}"
+              ><img src="{{ product | img_url: "master" }}" alt="{{
+                product.title
+              }}"></a
+            >
+          </div>
+          {% endfor %} {% endpaginate %}
+        </div>
+      </div>
+      <h3>
+        <a
+          href="{{ collection.url }}"
+          title="{{ 'collections.general.link_title' | t: title:title }}"
+          ><span>Shop Now</span> →</a
+        >
+      </h3>
     </div>
-    <h3>
-      <a
-        href="{{ collection.url }}"
-        title="{{ 'collections.general.link_title' | t: title:title }}"
-        ><span>Shop Now</span> →</a
-      >
-    </h3>
   </div>
+  {% endunless %} {% endfor %}
 </div>
-{% endunless %} {% endfor %}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.19/jquery.scrollify.js"></script>
 

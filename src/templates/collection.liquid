@@ -12,6 +12,17 @@
 {% if url == "/collections/types?q=" %}
 {% assign unknown = true %}
 {% endif %}
+
+<div id="collection-title-container">
+<div class="title white">
+  <div>
+  <h1>
+    {% if filtered %}All Products / {% endif %}{% if unknown %}Unknown Type{% else %}{{ collection.title }}{% endif%}
+  </h1>
+  <h2 class="scroll-down-icon mt-2">∨</h2>
+</div>
+</div>
+</div>
 <div
   id="collection-splash"
   {% if collection.image %}
@@ -22,10 +33,9 @@
   endif
   %}
 >
-  <div class="title white">
-    <h1>
-      {% if filtered %}All Products / {% endif %}{% if unknown %}Unknown Type{% else %}{{ collection.title }}{% endif%}
-    </h1>
+
+  <div class="overlay">
+  
   </div>
 </div>
 

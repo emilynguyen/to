@@ -4,7 +4,7 @@
   href="{{ link.url }}"
   >{{ link.title }}</a
 >
-
+ 
 {% if link.links != blank %}
 <ul {% if link.url == "/collections" and realNav == true %}id="collection-list"{% endif %} class="mb-1">
   {% for child_link in link.links %}

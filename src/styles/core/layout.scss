@@ -373,7 +373,9 @@ nav {
   margin-top: $top-space;
   margin-bottom: $top-space;
   display: flex;
-
+  img {
+    max-width: 100%;
+  }
   &:not(.product-page),
   &:not(.cart-page) {
     @extend .paragraph;
@@ -383,7 +385,9 @@ nav {
     padding-right: $side-margin;
     padding-bottom: $side-margin;
   }
-
+  h1 {
+    margin-top: -0.5vw;
+  }
   .page-content {
     width: 100%;
     @include media-query(large) {
@@ -418,6 +422,7 @@ nav {
       }
     }
   }
+
   &.cart-page {
     .quantity-container {
       margin-top: -0.5rem;
@@ -482,6 +487,21 @@ nav {
       @include media-query(medium-down) {
         display: flex;
       }
+    }
+  }
+  .staff-table {
+    td {
+      vertical-align: top;
+      padding: 0 $spacer-2 $spacer-2 0;
+      &:first-child {
+        width: 20%;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      //max-width: 200px;
     }
   }
 }
