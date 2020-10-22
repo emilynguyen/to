@@ -21,6 +21,7 @@
 }
 
 #collection-title-container {
+  cursor: s-resize;
   @include full-height;
   width: 100vw;
   position: fixed;
