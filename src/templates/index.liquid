@@ -1,6 +1,7 @@
 {{ content_for_index }}
 
-{% assign first_collection = linklists.sidebar-menu.links.first.links.first.object %}
+{% assign first_collection =
+linklists.sidebar-menu.links.first.links.first.object %}
 
 <!-- invisible div used to load default splash image -->
 <div
@@ -18,43 +19,74 @@
     settings.customHomepage_image | img_url: 'master'
   }}{% else %}{{ first_collection.image | img_url: 'master' }}{% endif %}');"
 >
-<!-- announcement text  -->
-<div class="title-center announcement-text medium-down--hide {% if settings.customHomepage_text == blank %}hide{% endif %}">
-  <div>
-    <h3>{% if settings.customHomepage_url != blank %}<a href="{{settings.customHomepage_url}}" title="">{% endif %}{{settings.customHomepage_text}}{% if settings.customHomepage_url != blank %} →</a>{% endif %}</h2>
-  </div> 
-</div>
-<!-- desktop link to newest collection; hide if announcement image or text -->
-<div class="title-center shop-newest-link medium-down--hide {% if settings.customHomepage_image != blank or settings.customHomepage_text != blank %}hide{% endif %}">
-  <div>
-    <h3><a href="{{first_collection.url}}" title="">Shop {{first_collection.title}} Now →</a></h2>
-  </div> 
-</div>
-<!-- mobile title -->
+  <!-- announcement text  -->
+  <div
+    class="title-center announcement-text medium-down--hide {% if settings.customHomepage_text == blank %}hide{% endif %}"
+  >
+    <div>
+      <h2>
+        {% if settings.customHomepage_url != blank %}<a
+          href="{{ settings.customHomepage_url }}"
+          title=""
+          >{% endif %}{{ settings.customHomepage_text }}{% if
+          settings.customHomepage_url != blank %} </a
+        >{% endif %}
+      </h2>
+    </div>
+  </div>
+  <!-- desktop link to newest collection; hide if announcement image or text -->
+  <div
+    class="title-center shop-newest-link medium-down--hide {% if settings.customHomepage_image != blank or settings.customHomepage_text != blank %}hide{% endif %}"
+  >
+    <div>
+      <a class="title-link" href="{{ first_collection.url }}" title="">
+        <h2 class="text-white" style="position: relative">
+          {{ first_collection.title }}
+        </h2></a
+      >
+    </div>
+  </div>
+  <!-- mobile title -->
   <div class="title-center large-up--hide">
     <div>
       <h1 class="mb-1">{{ shop.name }}</h1>
-      <h3><a href="{% if settings.customHomepage_url != blank %}{{settings.customHomepage_url}}{% else %}/collections{% endif%}" title="">{% if settings.customHomepage_text != blank %}{{settings.customHomepage_text}}{% else %}Shop Now{% endif%} →</a></h3>
-    </div> 
+
+      <a
+        class="title-link"
+        href="{% if settings.customHomepage_url != blank %}{{
+          settings.customHomepage_url
+        }}{% else %}/collections{% endif%}"
+        title=""
+        ><h2>
+          {% if settings.customHomepage_text != blank %}{{
+            settings.customHomepage_text
+          }}{% else %}Shop Now{% endif%}
+        </h2></a
+      >
+    </div>
   </div>
 </div>
 
-
 <!-- invisible div used to load collection images-->
 <ul id="home-images">
-  {% for link in linklists.sidebar-menu.links.first.links %} {% assign collection =
-  link.object %}
-  <li {% if forloop.first %}class="first"{% endif %}
+  {% for link in linklists.sidebar-menu.links.first.links %} {% assign
+  collection = link.object %}
+  <li
+    {%
+    if
+    forloop.first
+    %}class="first"
+    {%
+    endif
+    %}
     style="background-image: url('{{ collection.image | img_url: 'master' }}');"
   ></li>
   {% endfor %}
 </ul>
 
-
 <script>
-  var $newestLink = $('.shop-newest-link');
-  var $announcementText = $('.announcement-text');
-
+  var $newestLink = $(".shop-newest-link");
+  var $announcementText = $(".announcement-text");
 
   $("#collection-list a").mouseover(function() {
     console.log("mouseover");
@@ -75,7 +107,7 @@
     var newImg = $("#home-images li")
       .eq(i)
       .css("background-image");
-      
+
     $("#splash").css("background-image", newImg);
   });
 
@@ -88,6 +120,4 @@
     // show announcement link
     $announcementText.show();
   });
-
-
 </script>

@@ -44,6 +44,7 @@ html {
 
 #splash {
   //background-color: $color-accent;
+
   background-position: center center;
   background-size: cover;
   @include full-height;
@@ -52,8 +53,23 @@ html {
     justify-content: center;
     align-items: center;
     height: 100%;
-    color: #000;
+    color: #fff;
     //mix-blend-mode: difference;
+    .title-link {
+      position: relative;
+      &:after {
+        content: "→";
+        display: inline-block;
+        font-size: 3.6rem;
+        color: #fff;
+        display: block;
+        position: absolute;
+        right: -4rem;
+        top: -0.3rem;
+        animation: bounce-right 600ms infinite alternate;
+        -webkit-animation: bounce-right 600ms infinite alternate;
+      }
+    }
   }
   a {
     cursor: pointer;
@@ -65,6 +81,23 @@ html {
       transform: scale(1.1);
     } */
     @extend .hover-scale;
+  }
+}
+
+@keyframes bounce-right {
+  from {
+    transform: translateX(0px);
+  }
+  to {
+    transform: translateX(15px);
+  }
+}
+@-webkit-keyframes bounce {
+  from {
+    transform: translateX(0px);
+  }
+  to {
+    transform: translateX(15px);
   }
 }
 
@@ -80,6 +113,7 @@ html {
   display: flex;
   #side {
     height: 100%;
+    //z-index: 1;
     //@include full-height;
     padding: $side-margin $side-margin 0 $side-margin;
     @include media-query(medium-down) {

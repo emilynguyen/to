@@ -17,11 +17,12 @@
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 116, 122, 0.5);
   }
 }
 
 #collection-title-container {
-  cursor: s-resize;
+  // cursor: s-resize;
   @include full-height;
   width: 100vw;
   position: fixed;
@@ -37,6 +38,7 @@
       color: #fff;
     }
     .scroll-down-icon {
+      font-size: 3.6rem;
       text-align: center;
       animation: bounce 600ms infinite alternate;
       -webkit-animation: bounce 600ms infinite alternate;
