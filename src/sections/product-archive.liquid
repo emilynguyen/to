@@ -75,20 +75,23 @@
          <!-- PRICE -->
          <h3 class="mb-2 price">
           <div data-price-wrapper>
-            <span data-product-price {% if product.available == false or current_variant.available == false %}class="unavailable"{% endif %}>
+
+            <span data-product-price class="{% if product.available == false or current_variant.available == false %} unavailable {% endif %} {% if current_variant.compare_at_price > current_variant.price %} text-teal {% endif %}">
               {{ current_variant.price | money }}
             </span>
       
+            <!-- IF SALE -->
             {% if product.compare_at_price_max > product.price %}
+            
               <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
               <s data-compare-price>
                 {% if current_variant.compare_at_price > current_variant.price %}
-                  {{ current_variant.compare_at_price | money }}
+                  {{ current_variant.compare_at_price | money }} 
                 {% endif %}
               </s>
             {% endif %}
-            
           </div>
+          <!-- IF SOLD OUT -->
           {% unless product.available %}<span class="sold-out"> Sold Out</span>{% endunless %}
          </h3>
          <div class="mb-2">

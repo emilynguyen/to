@@ -79,7 +79,9 @@
            <!-- PRICE -->
            <h3 class="mb-2 price">
             <div data-price-wrapper>
-              <span data-product-price class="{% unless current_variant.available %}unavailable{% endunless %} {% unless product.available %}unavailable{% endunless %}">{{ current_variant.price | money }}</span>
+              <span data-product-price class="{% if product.available == false or current_variant.available == false %} unavailable {% endif %} {% if current_variant.compare_at_price > current_variant.price %} text-teal {% endif %}">
+                {{ current_variant.price | money }}
+              </span>
         
               {% if product.compare_at_price_max > product.price %}
                 <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
@@ -100,6 +102,22 @@
           
            {% if product.available %}
            {% form 'product', product, data-product-form: '', data-product-handle: product.handle, data-enable-history-state: 'true' %}
+
+           <!-- IF 1 VARIANT -->
+           {% if product.has_only_default_variant %}
+              <select name="id" style="display: none">
+                {% for variant in product.variants %}
+                  <option
+                    {% if variant == current_variant %}selected="selected"{% endif %}
+                    {% unless variant.available %}disabled="disabled"{% endunless %}
+                    value="{{ variant.id }}">
+                      {{ variant.title }}
+                  </option>
+                {% endfor %}
+              </select>
+           {% endif %}
+
+           <!-- IF MULTIPLE VARIANTS -->
            {% unless product.has_only_default_variant %}
            <div class="grid">
              {% for option in product.options_with_values %}

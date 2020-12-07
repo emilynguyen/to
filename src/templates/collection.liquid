@@ -87,6 +87,7 @@
   <div class="grid">
     {% paginate collection.products by 20 %} {% for product in
     collection.products %}
+    {%- assign current_variant = product.selected_or_first_available_variant -%}
     <div
       class="grid__item product-card medium--one-half large-up--one-third  widescreen--one-quarter small--mb-2 mb-3 {% if product.available %}available{% else %}soldout{% endif %}"
     >
@@ -118,7 +119,28 @@
         <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
       </p>
       <p>
-        <b>{{ product.price | money }}</b>
+        <b>
+          <div data-price-wrapper>
+
+            <span data-product-price class="{% if product.available == false or current_variant.available == false %} unavailable {% endif %} {% if current_variant.compare_at_price > current_variant.price %} text-teal {% endif %}">
+              {{ current_variant.price | money }}
+            </span>
+      
+            <!-- IF SALE -->
+            {% if product.compare_at_price_max > product.price %}
+            
+              <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+              <s data-compare-price>
+                {% if current_variant.compare_at_price > current_variant.price %}
+                  {{ current_variant.compare_at_price | money }} 
+                {% endif %}
+              </s>
+            {% endif %}
+          </div>
+          
+
+          <!-- {{ product.price | money }} -->
+        </b>
       </p>
     </div>
     {% endfor %}

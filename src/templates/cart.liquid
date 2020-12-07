@@ -18,7 +18,9 @@
           ===================== The data-label attributes on
           <td>
             elements are mobile-friendly helpers used for responsive-table
-            labels {% endcomment %}
+            labels {% endcomment %} {%- assign product = item.product -%} {%-
+            assign current_variant = product.selected_or_first_available_variant
+            -%}
 
             <tr class="responsive-table-row">
               <td
@@ -81,7 +83,27 @@
                 }}</span>
                 <s>{{ item.original_price | money }}</s>
                 {% else %}
-                {{ item.price | money }}
+
+                <span
+                  data-product-price
+                  class="{% if product.available == false or current_variant.available == false %} unavailable {% endif %} {% if current_variant.compare_at_price > current_variant.price %} text-teal {% endif %}"
+                >
+                  {{ current_variant.price | money }}
+                </span>
+
+                <!-- IF SALE -->
+                {% if product.compare_at_price_max > product.price %}
+
+                <span class="visually-hidden" data-compare-text>{{
+                  "products.product.regular_price" | t
+                }}</span>
+                <s data-compare-price>
+                  {% if current_variant.compare_at_price > current_variant.price
+                  %}
+                  {{ current_variant.compare_at_price | money }}
+                  {% endif %}
+                </s>
+
                 {% endif %}
               </td>
               <td data-label="{{ 'cart.label.quantity' | t }}">
